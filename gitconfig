@@ -1,0 +1,13 @@
+# This is Git's per-user configuration file.
+[user]
+	name = CJ Enright
+	email = cenrigh@purdue.edu
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[core]
+	excludesfile = /Users/cj/.gitignore_global
+[url "git@github.com:"]
+	    insteadOf = https://github.com/
