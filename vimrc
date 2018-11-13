@@ -12,9 +12,9 @@ endif
 call plug#begin('~/.vim/plugged')
 	" Lazy load nerdtree
 	Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+	Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 	Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 	Plug 'junegunn/fzf.vim'
-	"Plug 'sheerun/vim-polyglot'
 	Plug 'airblade/vim-gitgutter'
 	Plug 'tpope/vim-surround'
 	Plug 'ludovicchabant/vim-gutentags'
@@ -28,6 +28,8 @@ set background=dark " Make the background dark
 set confirm " Prompt when trying to quit without saving
 let mapleader = " " " Use <Space> as the leader key
 set spelllang=en_us,de_de " Used English and German spell checking
+set autoread
+set autowrite
 autocmd BufRead,BufNewFile *.md setlocal spell " Turn on spell check in md files
 
 " ## Tab complete settings
@@ -118,18 +120,23 @@ endif
 " ## Windows and tabs and such
 set splitright " Open new splits to the right the current one
 
+let g:vimwiki_conceallevel = 0
 let g:vimwiki_list = [{'path': '~/Documents/git/notes',
 			\ 'syntax': 'markdown',
 			\ 'ext': '.md'}]
 
+let g:go_fmt_command = "goimports"
+let NERDTreeShowHidden=1
+
 " ## Remappings
 " ### Global mode
 " Open nerdtree on ctrl n
-map <C-n> :NERDTreeToggle<CR>
+map <C-n> ;NERDTreeToggle<CR>
 let NERDTreeMinimalUI=1
 
 " ### Normal mode
 nnoremap ; :
+nnoremap : :
 nnoremap <_> <Plug>Vimwiki2HTML
 nnoremap <_> <Plug>Vimwiki2HTMLBrowse
 nnoremap <leader>w <C-w>
@@ -137,6 +144,8 @@ nnoremap <Leader><Leader> <C-^>
 nnoremap <Leader>j :w<Enter>
 nnoremap <Leader>k :wq<Enter>
 nmap <silent> <Leader>/ :nohlsearch<CR>
+" #### vim go
+nnoremap <Leader>s :GoBuild<Enter>
 " #### FZF 
 nnoremap <Leader>ff :FZF<Enter>
 nnoremap <leader>fm :Marks<CR>

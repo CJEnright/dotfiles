@@ -1,6 +1,9 @@
-local hyper = {"cmd", "ctrl", "alt"}
+local hyper = {"cmd", "ctrl", "alt", "shift"}
 
-hs.hotkey.bind(hyper, "left", function()
+-- Disable animations
+hs.window.animationDuration = 0
+
+hs.hotkey.bind(hyper, "t", function()
 	local win = hs.window.focusedWindow()
 	local f = win:frame()
 	local screen = win:screen()
@@ -14,7 +17,7 @@ hs.hotkey.bind(hyper, "left", function()
 end)
 
 
---autoreload config
+-- Autoreload config
 function reloadConfig(files)
 	doReload = false
 	for _,file in pairs(files) do
