@@ -133,6 +133,8 @@ let NERDTreeShowHidden=1
 " Open nerdtree on ctrl n
 map <C-n> ;NERDTreeToggle<CR>
 let NERDTreeMinimalUI=1
+let NERDTreeIgnore = ['.DS_Store', 'tags', 'tags.lock']
+
 
 " ### Normal mode
 nnoremap ; :
