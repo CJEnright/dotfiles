@@ -7,6 +7,7 @@ mkdir ~/.config
 
 # vim
 mkdir ~/.vim
+mkdir ~/.vim/plugged
 ln -s ${BASEDIR}/vimrc ~/.vim/vimrc
 
 # zsh
