@@ -1,8 +1,22 @@
 local hyper = {"cmd", "ctrl", "alt", "shift"}
 local padding = 10
+local switcher = hs.window.switcher.new()
 
 -- Disable animations
 hs.window.animationDuration = 0
+
+-- cmd tab on hyper + i
+hs.hotkey.bind(hyper, "i", function()
+	switcher:next()
+end)
+
+-- Switch monitors (if there are any)
+hs.hotkey.bind(hyper, "m", function()
+	local win = hs.window.focusedWindow()
+	local screen = win:screen()
+
+	win:moveToScreen(screen:next())
+end)
 
 -- Toggle padding sizes
 hs.hotkey.bind(hyper, "p", function()
