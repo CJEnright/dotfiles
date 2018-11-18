@@ -26,5 +26,7 @@ ln -s ${BASEDIR}/karabiner.json ~/.config/karabiner/karabiner.json
 
 # hammerspoon
 mkdir ~/.hammerspoon
-ln -s ${BASEDIR}/init.lua ~/.hammerspoon/init.lua
+ln -s ${BASEDIR}/hammerspoon/init.lua ~/.hammerspoon/init.lua
+ln -s ${BASEDIR}/hammerspoon/keybinds.lua ~/.hammerspoon/keybinds.lua
+ln -s ${BASEDIR}/hammerspoon/logging.lua ~/.hammerspoon/logging.lua
 
