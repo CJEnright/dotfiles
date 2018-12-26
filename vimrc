@@ -30,6 +30,7 @@ let mapleader = " " " Use <Space> as the leader key
 set spelllang=en_us,de_de " Used English and German spell checking
 set autoread
 set autowrite
+set fillchars=vert:\ 				" Have no chars in split divider
 autocmd BufRead,BufNewFile *.md setlocal spell " Turn on spell check in md files
 
 " ## Tab complete settings
@@ -64,7 +65,7 @@ set shiftround " use multiple of shiftwidth when indenting with '<' and '>'
 filetype indent on
 
 " Show line numbers
-set number
+"set number
 
 " Strip trailing whitespace
 "autocmd BufWritePre * %s/\s\+$//e
@@ -120,7 +121,6 @@ endif
 " ## Windows and tabs and such
 set splitright " Open new splits to the right the current one
 
-let g:vimwiki_conceallevel = 0
 let g:vimwiki_list = [{'path': '~/Documents/git/notes',
 			\ 'syntax': 'markdown',
 			\ 'ext': '.md'}]
@@ -148,6 +148,7 @@ nnoremap <Leader>k :wq<Enter>
 nmap <silent> <Leader>/ :nohlsearch<CR>
 " #### vim go
 nnoremap <Leader>s :GoBuild<Enter>
+nnoremap <Leader>t :GoTest<Enter>
 " #### FZF 
 nnoremap <Leader>ff :FZF<Enter>
 nnoremap <leader>fm :Marks<CR>
@@ -166,17 +167,17 @@ inoremap jj <Esc>:w<CR>a
 " Use relative lines in normal, absolute in insert
 " WARNING: Makes scrolling with mouse wheel super slow
 " ^ lol just don't use the mouse?
-function! Relativize(v)
-	if &number
-		let &relativenumber = a:v
-	endif
-endfunction
-
-augroup relativize
-	autocmd!
-	autocmd BufWinEnter,FocusGained,InsertLeave,WinEnter * call Relativize(1)
-	autocmd BufWinLeave,FocusLost,InsertEnter,WinLeave * call Relativize(0)
-augroup END
+"function! Relativize(v)
+"	if &number
+"		let &relativenumber = a:v
+"	endif
+"endfunction
+"
+"augroup relativize
+"	autocmd!
+"	autocmd BufWinEnter,FocusGained,InsertLeave,WinEnter * call Relativize(1)
+"	autocmd BufWinLeave,FocusLost,InsertEnter,WinLeave * call Relativize(0)
+"augroup END
 
 
 " Things I used to use but don't anymore

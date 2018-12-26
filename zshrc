@@ -1,80 +1,70 @@
 # Aliases
-alias ll="ls ${lsflags} -l"
-alias la="ls ${lsflags} -la"
-alias ,="cd .."
-alias ..="cd .."
+alias l="ls -F"
 alias m="less"
 alias v="vim"
+alias t="tmux"
+
+alias la="ls -la"
 alias sshp="ssh cenrigh@moore01.cs.purdue.edu"
 alias gogit="cd ~/Documents/git"
-alias gogo="cd ~/Documents/git/go/src/github.com/cjenright"
 
-export FZF_DEFAULT_COMMAND='rg --files --follow --glob "!.git/*"'
+# ls anytime you cd
+function cd() {
+	builtin cd "$@" && ls -F
+}
 
-# Function to mkdir and cd
-mc () {
+# mkdir and cd
+function mc() {
     mkdir -p -- "$1" &&
       cd -P -- "$1"
 }
 
-function cd {
-	builtin cd "$@" && ls -F
+function killtb() {
+	pkill "Touch Bar agent";
+	killall "ControlStrip";
 }
 
-# Add thing to PATH
-export PATH=//usr/local/bin:$PATH
+# Misc options
+setopt AUTO_CD           # Move into a directory if input is not a command
+setopt AUTO_PUSHD        # Automatically push directory onto stack on cd
+setopt PUSHD_IGNORE_DUPS # Don't push directory onto stack multiple times
+setopt PUSHD_SILENT      # Don't print on directory stack push/pop
 
 # Tab completion
 autoload -Uz compinit && compinit
-setopt complete_in_word         # cd /ho/sco/tm<TAB> expands to /home/scott/tmp
-setopt auto_menu                # show completion menu on succesive tab presses
-setopt autocd                   # cd to a folder just by typing its name
-setopt always_to_end # When completing from the middle of a word, move the cursor to the end of the word
+setopt ALWAYS_TO_END    # When completing from the middle of a word, move the cursor to the end of the word
+setopt MENU_COMPLETE    # Automatically fill in first match on tab
 
 # History settings
 HISTFILE=~/.zhistory
 HISTSIZE=10000
-SAVEHIST=10000
-setopt append_history           # allow multiple sessions to append to one history
-setopt bang_hist                # treat ! special during command expansion
-setopt extended_history         # Write history in :start:elasped;command format
-setopt hist_expire_dups_first   # expire duplicates first when trimming history
-setopt hist_find_no_dups        # When searching history, dont repeat
-setopt hist_ignore_dups         # ignore duplicate entries of previous events
-setopt hist_ignore_space        # prefix command with a space to skip its recording
-setopt hist_reduce_blanks       # Remove extra blanks from each command added to history
-setopt hist_verify              # Dont execute immediately upon history expansion
-setopt inc_append_history       # Write to history file immediately, not when shell quits
-setopt share_history            # Share history among all sessions
+SAVEHIST=$HISTSIZE
+setopt APPEND_HISTORY          # allow multiple sessions to append to one history
+setopt BANG_HIST               # Treat ! special during command expansion
+setopt EXTENDED_HISTORY        # Write history in :start:elasped;command format
+setopt HIST_EXPIRE_DUPS_FIRST  # Expire duplicates first when trimming history
+setopt HIST_FIND_NO_DUPS       # When searching history, dont repeat
+setopt HIST_IGNORE_DUPS        # Ignore duplicate entries of previous events
+setopt HIST_IGNORE_SPACE       # Prefix command with a space to skip its recording
+setopt HIST_REDUCE_BLANKS      # Remove blank lines from each command added to history
+setopt HIST_VERIFY             # Don't execute immediately on history expansion
+setopt INC_APPEND_HISTORY      # Write to history file immediately, not when shell quits
 
-# MISC
 EDITOR=vim
-export BLOCK_SIZE="'1"          # Add commas to file siz
+bindkey -v
 
 # Prompt and theme
-setopt prompt_subst
-autoload -Uz vcs_info
-ZSH_THEME="good"
-
-# Left prompt
+setopt PROMPT_SUBST
 PROMPT=" %~ ❯ "
 
-# Should really clean this up ¯\_(ツ)_/¯
-export GOPATH=$HOME/Documents/git/go
-export GOBIN=$GOPATH/bin
-PATH="$GOPATH/bin:$PATH"
-export PATH=~/bin:$PATH
-export PATH="/usr/local/bin:$PATH"
+export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
+export GOPATH=$HOME/.go
+export PATH="$HOME/.cargo/bin:$PATH"
 
-applefuckingsucks() {
-	pkill "Touch Bar agent";
-	killall "ControlStrip";
-}
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Users/cj/Documents/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/cj/Documents/google-cloud-sdk/path.zsh.inc'; fi
-
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/cj/Documents/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/cj/Documents/google-cloud-sdk/completion.zsh.inc'; fi
