@@ -29,7 +29,9 @@ let mapleader = " "       " Use <Space> as the leader key
 set spelllang=en_us,de_de " Used English and German spell checking
 set autoread
 set autowrite
-set fillchars=vert:\ 			" Have no chars in split divider
+set fillchars=vert:\      " Don't put characters in split divider
+set cursorline            " Highlight line cursor is on
+hi CursorLine cterm=NONE ctermbg=240
 autocmd BufRead,BufNewFile *.md setlocal spell " Turn on spell check in md files
 
 " Tab complete settings
@@ -49,8 +51,8 @@ imap <Tab> <C-R>=Tab_Or_Complete()<CR>
 " Make backspace behave in a sane manner
 set backspace=indent,eol,start
 
-" Enable syntax highlighting
-"syntax enable
+" Disable syntax highlighting
+syntax off
 
 " Enable file type detection and do language-dependent indenting.
 filetype plugin indent on
@@ -65,8 +67,8 @@ filetype indent on
 " Rendering speed
 set ttyfast                " Faster redrawing.
 set lazyredraw             " Only redraw when necessary.
-set synmaxcol=200          " Only highlight the first 200 columns.
-set t_Co=256               " Use 256 bit colors
+"set synmaxcol=200          " Only highlight the first 200 columns.
+"set t_Co=256               " Use 256 bit colors
 
 " Temporary files
 " lets not have a bunch of temp files floating around everywhere
@@ -110,7 +112,7 @@ if has("autocmd")
 endif
 
 " ## Windows and tabs and such
-set splitright " Open new splits to the right the current one
+set splitright " Open new splits to the right of the current one
 
 let g:vimwiki_list = [{'path': '~/Documents/git/notes',
 			\ 'syntax': 'markdown',

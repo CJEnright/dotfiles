@@ -58,7 +58,11 @@ setopt PROMPT_SUBST
 PROMPT=" %~ ❯ "
 
 export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
+
 export GOPATH=$HOME/.go
+export GOBIN=$GOPATH/bin
+export PATH="$GOBIN:$PATH"
+
 export PATH="$HOME/.cargo/bin:$PATH"
 
 
