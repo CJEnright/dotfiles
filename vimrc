@@ -32,6 +32,7 @@ set autowrite
 set fillchars=vert:\      " Don't put characters in split divider
 set cursorline            " Highlight line cursor is on
 hi CursorLine cterm=NONE ctermbg=240
+match ErrorMsg '\%>80v.\+' " Highlight characters past 80 columns
 autocmd BufRead,BufNewFile *.md setlocal spell " Turn on spell check in md files
 
 " Tab complete settings
