@@ -1,14 +1,13 @@
 " Use ViM settings (not Vi)
 set nocompatible
 
-" Install vim-plug if it's not there
+" Install vim-plug if it's not found
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
-" Plugin dealings
 call plug#begin('~/.vim/plugged')
 	Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 	Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
@@ -21,25 +20,66 @@ call plug#begin('~/.vim/plugged')
 	Plug 'vimwiki/vimwiki'
 call plug#end()
 
-" Misc settings
-set ruler                 " Show cursor stats in bottom left
-set background=dark       " Make the background dark
-set confirm               " Prompt when trying to quit without saving
-let mapleader = " "       " Use <Space> as the leader key
-set spelllang=en_us,de_de " Used English and German spell checking
-set autoread
-set autowrite
-set fillchars=vert:\      " Don't put characters in split divider
-set cursorline            " Highlight line cursor is on
-hi CursorLine cterm=NONE ctermbg=240
-match ErrorMsg '\%>80v.\+' " Highlight characters past 80 columns
-autocmd BufRead,BufNewFile *.md setlocal spell " Turn on spell check in md files
+" Filetype detection
+filetype on         " Enable detecting filetype
+filetype plugin on  " Load plugin file (if there is one) for this filetype
+filetype indent on  " Use language dependent indenting
+
+" Miscellaneous settings
+set ruler                       " Show cursor stats in bottom left
+set confirm                     " Prompt when trying to quit without saving
+set autoread                    " Automatically read files
+set autowrite                   " Automatically write files
+set splitright                  " Open new splits to the right of the current one
+set scrolloff=5                 " Always show at least 5 lines on top or bottom 
+set fillchars=vert:\            " Don't put characters in split divider
+set backspace=indent,eol,start  " Make backspace like a normal editor
+
+" Searching
+set hlsearch   " Search highlighting
+set incsearch  " Start searching as you type
+set ignorecase " Ignore case
+set smartcase  " Only use case when search has capitals
+
+" Tabs and indentaion
+set autoindent    " Copy indention on new line
+set tabstop=2     " Tabs take up 2 columns
+set shiftwidth=2  " Indent 2 columns with '<' and '>'
+set shiftround    " Use multiple of shiftwidth when indenting with '<' and '>'
+
+" Rendering speed
+set ttyfast     " Faster redrawing.
+set lazyredraw  " Only redraw when necessary.
+
+" Colors
+syntax off                            " Disable syntax highlighting
+set background=dark                   " Use a dark background
+set cursorline                        " Highlight line cursor is on
+hi CursorLine cterm=NONE ctermbg=240  " Set cursorline color to light grey
+
+" Spell checking
+set spelllang=en_us,de_de                       " Use English and German spell checking
+autocmd BufRead,BufNewFile *.md setlocal spell  " Turn on spell check in md files
 
 " Tab complete settings
-set wildmenu
-set wildmode=longest,list,full
-set complete=.,b,u,]
-set completeopt=menu,preview
+set wildmenu  " Enable command line completions
+" wildmode defines how to show completions
+" longest:full  Show wildmenu with completions
+" full          Complete to next full match, wrap around at end
+set wildmode=longest:full,full
+" complete defines where to look for possible completions
+" .  Scan current buffer
+" w  Scan other windows
+" b  Scan buffers in the buffer list
+" u  Scan unloaded buffers in the buffer list
+" i  Scan included files
+" t  Scan tag files
+set complete=.,w,b,u,t,i
+" completeopt defines how to show insertion mode completions
+" noselect  Don't automatically select a completion (just list at first)
+set completeopt=noselect
+
+" Hit tab to start autocomplete when typing, otherwise just insert a tab
 function! Tab_Or_Complete()
 	if col('.')>1 && strpart( getline('.'), col('.')-2, 3 ) =~ '^\w'
 		return "\<C-N>"
@@ -49,108 +89,84 @@ function! Tab_Or_Complete()
 endfunction
 imap <Tab> <C-R>=Tab_Or_Complete()<CR>
 
-" Make backspace behave in a sane manner
-set backspace=indent,eol,start
-
-" Disable syntax highlighting
-syntax off
-
-" Enable file type detection and do language-dependent indenting.
-filetype plugin indent on
-
-" Tabs and indentaion
-set autoindent
-set tabstop=2 " Tabs take up 2 columns
-set shiftwidth=2 " Indent 2 columns with '<' and '>'
-set shiftround " use multiple of shiftwidth when indenting with '<' and '>'
-filetype indent on
-
-" Rendering speed
-set ttyfast                " Faster redrawing.
-set lazyredraw             " Only redraw when necessary.
-"set synmaxcol=200          " Only highlight the first 200 columns.
-"set t_Co=256               " Use 256 bit colors
 
 " Temporary files
-" lets not have a bunch of temp files floating around everywhere
+" Instead of having a bunch of these floating around, centralize them
 " Create temp files directory if needed
 if !isdirectory($HOME.'/.vim/files') && exists('*mkdir')
 	call mkdir($HOME.'/.vim/files')
 
-	" These are a bit sketch but should generally work unless you delete one
-	" later
 	call mkdir($HOME.'/.vim/files/backup')
 	call mkdir($HOME.'/.vim/files/swap')
 	call mkdir($HOME.'/.vim/files/undo')
 	call mkdir($HOME.'/.vim/files/info')
 endif
 
-" Backup files
-set backup
-set backupdir   =$HOME/.vim/files/backup/
-set backupext   =-vimbackup
-set backupskip  =/tmp/*,/private/tmp/*
-" Swap files
-set directory   =$HOME/.vim/files/swap//
-set updatecount =100
-" Undo files
-set undofile
-set undodir     =$HOME/.vim/files/undo/
-" Viminfo files
-set viminfo     ='100,n$HOME/.vim/files/info/viminfo
+" Creates a backup of a file when you open it
+set backup                               " Use backup files 
+set backupext =-vimbackup                " Extension for backup files
+set backupskip=/tmp/*,/private/tmp/*     " Directories to not use backup files
+set backupdir =$HOME/.vim/files/backup/  " Directory for backup files
 
-" Searching
-set hlsearch   " Search highlighting
-set incsearch  " Start searching as you type
-set ignorecase " Ignore case
-set smartcase  " Only use case when search has capitals
+" Swap files, stores changes made to buffers. Can be used to recover on crash
+set updatecount=100                      " Number of chars until swap is written
+set directory  =$HOME/.vim/files/swap//  " Double slash means use full path
 
-set scrolloff=5 " Always show at least 5 lines on top or bottom 
+" Stores undo history 
+set undofile                        " Use undo files
+set undodir=$HOME/.vim/files/undo/  " Directory for undo files
 
-" Jump to last line when file was closed
+" Stores things like search history and registers on quit
+set viminfo='100,n$HOME/.vim/files/info/viminfo  " Directory for viminfo files
+
+" Jump to the line a file was at when it was closed
 if has("autocmd")
 	au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 endif
 
-" ## Windows and tabs and such
-set splitright " Open new splits to the right of the current one
-
-let g:vimwiki_list = [{'path': '~/Documents/git/notes',
+let g:vimwiki_list = [{'path': '~/Code/notes',
 			\ 'syntax': 'markdown',
 			\ 'ext': '.md'}]
 
-let g:go_fmt_command = "goimports"
-let NERDTreeShowHidden=1
+let mapleader=" "         " Use <Space> as the leader key
 
-" ## Remappings
-" ### Global mode
-map <C-n> ;NERDTreeToggle<CR>
-let NERDTreeMinimalUI=1
+let g:tagbar_compact=1    " Make tagbar take up less space
+
+let NERDTreeShowHidden=1  " Show hidden files
+let NERDTreeMinimalUI=1   " Make NERDTree take up less space
 let NERDTreeIgnore = ['.DS_Store', 'tags', 'tags.lock']
 
-" ### Normal mode
+let g:go_fmt_command="goimports"  " Fix Go imports on save
+
+" Global mode
+map <C-n> ;NERDTreeToggle<CR>
+
+" Normal mode remappings
 nnoremap ; :
 nnoremap : ;
-nnoremap <_> <Plug>Vimwiki2HTML
-nnoremap <_> <Plug>Vimwiki2HTMLBrowse
 nnoremap <leader>w <C-w>
 nnoremap <Leader><Leader> <C-^>
 nnoremap <Leader>j :w<Enter>
 nnoremap <Leader>k :wq<Enter>
 nnoremap <silent> <Leader>/ :nohlsearch<CR>
-" #### vim go
+
+" Insert mode remappings
+inoremap jk <Esc>`^
+inoremap fd <Esc>`^
+
+" vim-go remappings
 nnoremap <Leader>s :GoBuild<Enter>
 nnoremap <Leader>t :GoTest<Enter>
-" #### FZF 
+
+" FZF remappings
 nnoremap <Leader>ff :FZF<Enter>
 nnoremap <leader>fm :Marks<CR>
 nnoremap <leader>ft :Tags<CR>
-" #### Tagbar
-nmap <C-m> :TagbarToggle<CR>
-let g:tagbar_map_showproto = '<F18>'
-let g:tagbar_compact = 1
 
-" ### Insert Mode
-inoremap jk <Esc>`^
-inoremap fd <Esc>`^
-inoremap jj <Esc>:w<CR>a
+" Tagbar remappings
+nmap <C-m> :TagbarToggle<CR>
+
+" Remapping things to noop so they get out of the way
+nnoremap <_> <Plug>Vimwiki2HTML
+nnoremap <_> <Plug>Vimwiki2HTMLBrowse
+let g:tagbar_map_showproto = '<F18>'
