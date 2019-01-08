@@ -3,17 +3,17 @@ alias l="ls -F"
 alias m="less"
 alias v="vim"
 alias t="tmux"
+alias g="git"
 
 alias la="ls -la"
 alias sshp="ssh cenrigh@moore01.cs.purdue.edu"
-alias gogit="cd ~/Documents/git"
 
-# ls anytime you cd
+# ls whenever you cd
 function cd() {
 	builtin cd "$@" && ls -F
 }
 
-# mkdir and cd
+# mkdir and cd in one command
 function mc() {
     mkdir -p -- "$1" &&
       cd -P -- "$1"

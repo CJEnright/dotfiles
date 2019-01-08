@@ -10,4 +10,12 @@
 [core]
 	excludesfile = /Users/cj/.gitignore_global
 [url "git@github.com:"]
-	    insteadOf = https://github.com/
+  insteadOf = https://github.com/
+[alias]
+	c = commit
+	a = add
+	s = status
+	d = diff
+	l = log
+	b = branch
+	co = checkout
