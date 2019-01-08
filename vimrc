@@ -15,8 +15,6 @@ call plug#begin('~/.vim/plugged')
 	Plug 'junegunn/fzf.vim'
 	Plug 'airblade/vim-gitgutter'
 	Plug 'tpope/vim-surround'
-	Plug 'ludovicchabant/vim-gutentags'
-	Plug 'majutsushi/tagbar'
 	Plug 'vimwiki/vimwiki'
 call plug#end()
 
@@ -73,8 +71,7 @@ set wildmode=longest:full,full
 " b  Scan buffers in the buffer list
 " u  Scan unloaded buffers in the buffer list
 " i  Scan included files
-" t  Scan tag files
-set complete=.,w,b,u,t,i
+set complete=.,w,b,u,i
 " completeopt defines how to show insertion mode completions
 " noselect  Don't automatically select a completion (just list at first)
 set completeopt=noselect
@@ -130,11 +127,9 @@ let g:vimwiki_list = [{'path': '~/Code/notes',
 
 let mapleader=" "         " Use <Space> as the leader key
 
-let g:tagbar_compact=1    " Make tagbar take up less space
-
 let NERDTreeShowHidden=1  " Show hidden files
 let NERDTreeMinimalUI=1   " Make NERDTree take up less space
-let NERDTreeIgnore = ['.DS_Store', 'tags', 'tags.lock']
+let NERDTreeIgnore = ['.DS_Store']
 
 let g:go_fmt_command="goimports"  " Fix Go imports on save
 
@@ -159,14 +154,8 @@ nnoremap <Leader>s :GoBuild<Enter>
 nnoremap <Leader>t :GoTest<Enter>
 
 " FZF remappings
-nnoremap <Leader>ff :FZF<Enter>
-nnoremap <leader>fm :Marks<CR>
-nnoremap <leader>ft :Tags<CR>
-
-" Tagbar remappings
-nmap <C-m> :TagbarToggle<CR>
+nnoremap <Leader>f :FZF<Enter>
 
 " Remapping things to noop so they get out of the way
 nnoremap <_> <Plug>Vimwiki2HTML
 nnoremap <_> <Plug>Vimwiki2HTMLBrowse
-let g:tagbar_map_showproto = '<F18>'
