@@ -1,5 +1,4 @@
 local hyper = {"cmd", "ctrl", "alt", "shift"}
-local padding = 10
 local switcher = hs.window.switcher.new()
 
 -- Disable animations
@@ -13,15 +12,6 @@ hs.hotkey.bind(hyper, "m", function()
 	win:moveToScreen(screen:next())
 end)
 
--- Toggle padding sizes
-hs.hotkey.bind(hyper, "p", function()
-	if padding == 10 then
-		padding = 0
-	else
-		padding = 10
-	end
-end)
-
 -- Maximize current window
 hs.hotkey.bind(hyper, "f", function()
 	local win = hs.window.focusedWindow()
@@ -29,10 +19,10 @@ hs.hotkey.bind(hyper, "f", function()
 	local screen = win:screen()
 	local max = screen:frame()
 
-	f.x = max.x + padding
-	f.y = max.y + padding
-	f.w = max.w - (padding * 2)
-	f.h = max.h - (padding * 2)
+	f.x = max.x
+	f.y = max.y
+	f.w = max.w
+	f.h = max.h
 	win:setFrame(f)
 end)
 
@@ -43,10 +33,10 @@ hs.hotkey.bind(hyper, "d", function()
 	local screen = win:screen()
 	local max = screen:frame()
 
-	f.x = max.x + padding
-	f.y = max.y + padding
-	f.w = max.w / 2 - (padding * 2)
-	f.h = max.h - (padding * 2)
+	f.x = max.x
+	f.y = max.y
+	f.w = max.w / 2
+	f.h = max.h
 	win:setFrame(f)
 end)
 
@@ -57,10 +47,10 @@ hs.hotkey.bind(hyper, "g", function()
 	local screen = win:screen()
 	local max = screen:frame()
 
-	f.x = max.x + (max.w / 2) + padding
-	f.y = max.y + padding
-	f.w = max.w / 2 - (padding * 2)
-	f.h = max.h - (padding * 2)
+	f.x = max.x + (max.w / 2)
+	f.y = max.y
+	f.w = max.w / 2
+	f.h = max.h
 	win:setFrame(f)
 end)
 
