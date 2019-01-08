@@ -5,11 +5,6 @@ local switcher = hs.window.switcher.new()
 -- Disable animations
 hs.window.animationDuration = 0
 
--- cmd tab on hyper + i
-hs.hotkey.bind(hyper, "i", function()
-	switcher:next()
-end)
-
 -- Switch monitors (if there are any)
 hs.hotkey.bind(hyper, "m", function()
 	local win = hs.window.focusedWindow()
