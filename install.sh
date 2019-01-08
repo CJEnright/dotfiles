@@ -8,25 +8,22 @@ mkdir ~/.config
 # vim
 mkdir ~/.vim
 mkdir ~/.vim/plugged
-ln -s ${BASEDIR}/vimrc ~/.vim/vimrc
+ln -fs ${BASEDIR}/vimrc ~/.vim/vimrc
 
 # zsh
-ln -s ${BASEDIR}/zshrc ~/.zshrc
+ln -fs ${BASEDIR}/zshrc ~/.zshrc
 
 # tmux
-ln -s ${BASEDIR}/tmux.conf ~/.tmux.conf
+ln -fs ${BASEDIR}/tmux.conf ~/.tmux.conf
 
 # git
-ln -s ${BASEDIR}/gitconfig ~/.gitconfig
-ln -s ${BASEDIR}/gitignore_global ~/.gitignore_global
+ln -fs ${BASEDIR}/gitconfig ~/.gitconfig
+ln -fs ${BASEDIR}/gitignore_global ~/.gitignore_global
 
 # karabiner
 mkdir ~/.config/karabiner
-ln -s ${BASEDIR}/karabiner.json ~/.config/karabiner/karabiner.json
+ln -fs ${BASEDIR}/karabiner.json ~/.config/karabiner/karabiner.json
 
 # hammerspoon
 mkdir ~/.hammerspoon
-ln -s ${BASEDIR}/hammerspoon/init.lua ~/.hammerspoon/init.lua
-ln -s ${BASEDIR}/hammerspoon/keybinds.lua ~/.hammerspoon/keybinds.lua
-ln -s ${BASEDIR}/hammerspoon/logging.lua ~/.hammerspoon/logging.lua
-
+ln -fs ${BASEDIR}/hammerspoon/init.lua ~/.hammerspoon/init.lua
