@@ -25,15 +25,17 @@ function killtb() {
 }
 
 # Misc options
-setopt AUTO_CD           # Move into a directory if input is not a command
-setopt AUTO_PUSHD        # Automatically push directory onto stack on cd
-setopt PUSHD_IGNORE_DUPS # Don't push directory onto stack multiple times
-setopt PUSHD_SILENT      # Don't print on directory stack push/pop
+setopt AUTO_CD            # Move into a directory if input is not a command
+setopt AUTO_PUSHD         # Automatically push directory onto stack on cd
+setopt PUSHD_IGNORE_DUPS  # Don't push directory onto stack multiple times
+setopt PUSHD_SILENT       # Don't print on directory stack push/pop
 
 # Tab completion
 autoload -Uz compinit && compinit
 setopt ALWAYS_TO_END    # When completing from the middle of a word, move the cursor to the end of the word
 setopt MENU_COMPLETE    # Automatically fill in first match on tab
+# Case insensitive completion (APFS is case insensitive anyway)
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 
 # History settings
 HISTFILE=~/.zhistory
@@ -53,7 +55,7 @@ setopt INC_APPEND_HISTORY      # Write to history file immediately, not when she
 EDITOR=vim
 bindkey -v
 
-# Prompt and theme
+# Prompt
 setopt PROMPT_SUBST
 PROMPT=" %~ ❯ "
 
@@ -64,7 +66,6 @@ export GOBIN=$GOPATH/bin
 export PATH="$GOBIN:$PATH"
 
 export PATH="$HOME/.cargo/bin:$PATH"
-
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
