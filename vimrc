@@ -77,7 +77,7 @@ set wildmode=longest:full,full
 set complete=.,w,b,u,t,i
 " completeopt defines how to show insertion mode completions
 " noselect  Don't automatically select a completion (just list at first)
-set completeopt=noselect
+set completeopt=noselect,menu
 
 " Hit tab to start autocomplete when typing, otherwise just insert a tab
 function! Tab_Or_Complete()
