@@ -52,7 +52,7 @@ set ttyfast     " Faster redrawing.
 set lazyredraw  " Only redraw when necessary.
 
 " Colors
-syntax off                            " Disable syntax highlighting
+syntax on                             " Enable syntax highlighting
 set background=dark                   " Use a dark background
 set cursorline                        " Highlight line cursor is on
 hi CursorLine cterm=NONE ctermbg=240  " Set cursorline color to light grey
