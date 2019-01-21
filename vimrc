@@ -152,7 +152,6 @@ nnoremap <silent> <Leader>/ :nohlsearch<CR>
 
 " Insert mode remappings
 inoremap jk <Esc>`^
-inoremap fd <Esc>`^
 
 " vim-go remappings
 nnoremap <Leader>s :GoBuild<Enter>

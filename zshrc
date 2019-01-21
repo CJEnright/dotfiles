@@ -6,7 +6,7 @@ alias t="tmux"
 alias g="git"
 
 alias la="ls -la"
-alias sshp="ssh cenrigh@moore01.cs.purdue.edu"
+alias sshp="ssh cenrigh@moore08.cs.purdue.edu"
 
 # ls whenever you cd
 function cd() {
