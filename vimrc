@@ -168,3 +168,6 @@ nnoremap <leader>t :TagbarToggle<CR>
 nnoremap <_> <Plug>Vimwiki2HTML
 nnoremap <_> <Plug>Vimwiki2HTMLBrowse
 let g:tagbar_map_showproto = '<F18>'
+
+" Expand "dtdy" int today's date
+iab dtdy <c-r>=strftime("%Y-%m-%d")<CR>
