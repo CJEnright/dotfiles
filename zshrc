@@ -54,10 +54,24 @@ setopt INC_APPEND_HISTORY      # Write to history file immediately, not when she
 
 EDITOR=vim
 bindkey -v
+bindkey 'jk' vi-cmd-mode  # Enter vi mode on 'jk'
 
 # Prompt
 setopt PROMPT_SUBST
-PROMPT=" %~ ❯ "
+
+# Flip prompt arrow to show insert or normal mode
+function zle-line-init zle-keymap-select {
+	if [ $KEYMAP = vicmd ]; then
+		PROMPT=" %~ ❮ "
+	else
+		PROMPT=" %~ ❯ "
+	fi
+
+	zle reset-prompt
+}
+
+zle -N zle-line-init      # Run on line init
+zle -N zle-keymap-select  # Run on keymap change
 
 export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
 
