@@ -15,13 +15,25 @@ function cd() {
 
 # mkdir and cd in one command
 function mc() {
-    mkdir -p -- "$1" &&
-      cd -P -- "$1"
+	mkdir -p -- "$1" &&
+	cd -P -- "$1"
 }
 
+# Restart touchbar because technology is awful
 function killtb() {
 	pkill "Touch Bar agent";
 	killall "ControlStrip";
+}
+
+# Wrap ssh to show short hostname in tmux window name
+function ssh {
+	if ! { [ "$TERM" = "screen" ] && [ -n "$TMUX" ]; } then
+		tmux rename-window "ssh $(echo $* | cut -d . -f 1)"
+		command ssh "$@"
+		tmux set-window-option automatic-rename "on"
+	else
+		command ssh "$@"
+	fi
 }
 
 # Misc options
