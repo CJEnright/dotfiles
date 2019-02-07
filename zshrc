@@ -28,7 +28,7 @@ function killtb() {
 # Wrap ssh to show short hostname in tmux window name
 function ssh {
 	if ! { [ "$TERM" = "screen" ] && [ -n "$TMUX" ]; } then
-		tmux rename-window "ssh $(echo $* | cut -d . -f 1)"
+		tmux rename-window "$(echo $* | cut -d . -f 1)"
 		command ssh "$@"
 		tmux set-window-option automatic-rename "on"
 	else
