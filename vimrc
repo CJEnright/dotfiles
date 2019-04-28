@@ -13,7 +13,6 @@ call plug#begin('~/.vim/plugged')
 	Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 	Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 	Plug 'junegunn/fzf.vim'
-	Plug 'airblade/vim-gitgutter'
 	Plug 'tpope/vim-surround'
 	Plug 'ludovicchabant/vim-gutentags'
 	Plug 'majutsushi/tagbar'
@@ -24,6 +23,8 @@ call plug#end()
 filetype on         " Enable detecting filetype
 filetype plugin on  " Load plugin file (if there is one) for this filetype
 filetype indent on  " Use language dependent indenting
+
+au! FileType css,scss setl iskeyword+=- " Make hypens part of words in CSS files
 
 " Miscellaneous settings
 set ruler                       " Show cursor stats in bottom left
@@ -56,6 +57,8 @@ syntax on                             " Enable syntax highlighting
 set background=dark                   " Use a dark background
 set cursorline                        " Highlight line cursor is on
 hi CursorLine cterm=NONE ctermbg=240  " Set cursorline color to light grey
+hi clear SpellBad                     " Reset spell checker color
+hi SpellBad cterm=underline           " Underline misspelled words
 
 " Spell checking
 set spelllang=en_us,de_de                       " Use English and German spell checking
@@ -76,8 +79,9 @@ set wildmode=longest:full,full
 " t  Scan tag files
 set complete=.,w,b,u,t,i
 " completeopt defines how to show insertion mode completions
-" noselect  Don't automatically select a completion (just list at first)
-set completeopt=noselect,menu
+" longest  Match longest common text
+" menu     Show completion menu, unless there's only one option
+set completeopt=longest,menu
 
 " Hit tab to start autocomplete when typing, otherwise just insert a tab
 function! Tab_Or_Complete()
@@ -117,18 +121,23 @@ set undofile                        " Use undo files
 set undodir=$HOME/.vim/files/undo/  " Directory for undo files
 
 " Stores things like search history and registers on quit
-set viminfo='100,n$HOME/.vim/files/info/viminfo  " Directory for viminfo files
+" %     Store buffer list
+" <1000 Store up to 800 lines in each register
+" '100  Store up to 100 file marks
+" /1000 Store up to 1000 searches
+" :1000 Store up to 1000 commands
+" Last argument is where viminfo is stored
+set viminfo=%,<1000,'100,/1000,:1000,n$HOME/.vim/files/info/viminfo
 
 " Jump to the line a file was at when it was closed
 if has("autocmd")
 	au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 endif
 
+" Set vimwiki home path and tell it to use markdown
 let g:vimwiki_list = [{'path': '~/Code/notes',
 			\ 'syntax': 'markdown',
 			\ 'ext': '.md'}]
-
-let mapleader=" "         " Use <Space> as the leader key
 
 let g:tagbar_compact=1    " Make tagbar take up less space
 
@@ -136,7 +145,9 @@ let NERDTreeShowHidden=1  " Show hidden files
 let NERDTreeMinimalUI=1   " Make NERDTree take up less space
 let NERDTreeIgnore = ['.DS_Store', 'tags', 'tags.lock']
 
-let g:go_fmt_command="goimports"  " Fix Go imports on save
+let g:go_fmt_command="goimports"  " Run Go imports on save
+
+let mapleader=" "         " Use <Space> as the leader key
 
 " Global mode
 map <C-n> ;NERDTreeToggle<CR>
@@ -171,3 +182,13 @@ let g:tagbar_map_showproto = '<F18>'
 
 " Expand "dtdy" int today's date
 iab dtdy <c-r>=strftime("%Y-%m-%d")<CR>
+
+" Resize windows when vim is resized
+autocmd VimResized * :wincmd =
+
+" Don't lose selection on visual mode indent
+vnoremap < <gv
+vnoremap > >gv
+
+" Highlight merge conflict markers
+match Todo '\v^(\<|\=|\>){7}([^=].+)?$'
