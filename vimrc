@@ -14,6 +14,7 @@ call plug#begin('~/.vim/plugged')
 	Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 	Plug 'junegunn/fzf.vim'
 	Plug 'tpope/vim-surround'
+	Plug 'tpope/vim-fugitive'
 	Plug 'ludovicchabant/vim-gutentags'
 	Plug 'majutsushi/tagbar'
 	Plug 'vimwiki/vimwiki'
@@ -185,10 +186,6 @@ iab dtdy <c-r>=strftime("%Y-%m-%d")<CR>
 
 " Resize windows when vim is resized
 autocmd VimResized * :wincmd =
-
-" Don't lose selection on visual mode indent
-vnoremap < <gv
-vnoremap > >gv
 
 " Highlight merge conflict markers
 match Todo '\v^(\<|\=|\>){7}([^=].+)?$'
