@@ -1,11 +1,11 @@
-local hyper = {"cmd", "ctrl", "alt", "shift"}
+local ctrl_cmd = {"cmd", "ctrl"}
 local switcher = hs.window.switcher.new()
 
 -- Disable animations
 hs.window.animationDuration = 0
 
 -- Switch monitors (if there are any)
-hs.hotkey.bind(hyper, "m", function()
+hs.hotkey.bind(ctrl_cmd, "m", function()
 	local win = hs.window.focusedWindow()
 	local screen = win:screen()
 
@@ -13,7 +13,7 @@ hs.hotkey.bind(hyper, "m", function()
 end)
 
 -- Maximize current window
-hs.hotkey.bind(hyper, "f", function()
+hs.hotkey.bind(ctrl_cmd, "f", function()
 	local win = hs.window.focusedWindow()
 	local f = win:frame()
 	local screen = win:screen()
@@ -27,7 +27,7 @@ hs.hotkey.bind(hyper, "f", function()
 end)
 
 -- Put current window to left half of screen
-hs.hotkey.bind(hyper, "d", function()
+hs.hotkey.bind(ctrl_cmd, "d", function()
 	local win = hs.window.focusedWindow()
 	local f = win:frame()
 	local screen = win:screen()
@@ -41,7 +41,7 @@ hs.hotkey.bind(hyper, "d", function()
 end)
 
 -- Put current screen to right half of screen
-hs.hotkey.bind(hyper, "g", function()
+hs.hotkey.bind(ctrl_cmd, "g", function()
 	local win = hs.window.focusedWindow()
 	local f = win:frame()
 	local screen = win:screen()
@@ -53,12 +53,3 @@ hs.hotkey.bind(hyper, "g", function()
 	f.h = max.h
 	win:setFrame(f)
 end)
-
--- Autoreload config
-function reloadConfig(files)
-	hs.reload()
-	hs.alert.show("Config reloaded")
-end
-
-hs.pathwatcher.new(os.getenv("HOME") .. "/.hammerspoon/", reloadConfig):start()
-hs.alert.show("Config loaded")
