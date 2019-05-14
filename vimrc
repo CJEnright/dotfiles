@@ -9,10 +9,7 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.vim/plugged')
-	Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 	Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-	Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-	Plug 'junegunn/fzf.vim'
 	Plug 'tpope/vim-surround'
 	Plug 'tpope/vim-fugitive'
 	Plug 'ludovicchabant/vim-gutentags'
@@ -42,6 +39,16 @@ set hlsearch   " Search highlighting
 set incsearch  " Start searching as you type
 set ignorecase " Ignore case
 set smartcase  " Only use case when search has capitals
+
+" Find settings
+set path+=**                       " Let :find search sub directories
+set wildignore+=**/node_modules/** " Let :find ignore node_modules
+
+" Netrw settings
+let g:netrw_liststyle=3 
+let g:netrw_banner = 0
+let g:netrw_winsize = 15
+let g:netrw_browse_split = 4
 
 " Tabs and indentaion
 set autoindent    " Copy indention on new line
@@ -94,7 +101,6 @@ function! Tab_Or_Complete()
 endfunction
 imap <Tab> <C-R>=Tab_Or_Complete()<CR>
 
-
 " Temporary files
 " Instead of having a bunch of these floating around, centralize them
 " Create temp files directory if needed
@@ -142,16 +148,9 @@ let g:vimwiki_list = [{'path': '~/Code/notes',
 
 let g:tagbar_compact=1    " Make tagbar take up less space
 
-let NERDTreeShowHidden=1  " Show hidden files
-let NERDTreeMinimalUI=1   " Make NERDTree take up less space
-let NERDTreeIgnore = ['.DS_Store', 'tags', 'tags.lock']
-
 let g:go_fmt_command="goimports"  " Run Go imports on save
 
 let mapleader=" "         " Use <Space> as the leader key
-
-" Global mode
-map <C-n> ;NERDTreeToggle<CR>
 
 " Normal mode remappings
 nnoremap ; :
@@ -161,6 +160,7 @@ nnoremap <Leader><Leader> <C-^>
 nnoremap <Leader>j :w<Enter>
 nnoremap <Leader>k :wq<Enter>
 nnoremap <silent> <Leader>/ :nohlsearch<CR>
+nnoremap <leader>n :Vexplore<CR>
 
 " Insert mode remappings
 inoremap jk <Esc>`^
@@ -168,10 +168,8 @@ inoremap jk <Esc>`^
 " vim-go remappings
 nnoremap <Leader>s :GoBuild<Enter>
 
-" FZF remappings
-nnoremap <Leader>ff :FZF<Enter>
-nnoremap <leader>fm :Marks<CR>
-nnoremap <leader>ft :Tags<CR>
+" Find remapping
+nnoremap <Leader>f :find
 
 " Tagbar remappings
 nnoremap <leader>t :TagbarToggle<CR>
