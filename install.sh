@@ -27,3 +27,7 @@ ln -fs ${BASEDIR}/karabiner.json ~/.config/karabiner/karabiner.json
 # hammerspoon
 mkdir ~/.hammerspoon
 ln -fs ${BASEDIR}/hammerspoon/init.lua ~/.hammerspoon/init.lua
+
+# Ledger
+mkdir ~/.ledger
+ln -fs ${BASEDIR}/ledgerrc ~/.ledgerrc
