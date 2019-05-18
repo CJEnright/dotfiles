@@ -169,7 +169,7 @@ inoremap jk <Esc>`^
 nnoremap <Leader>s :GoBuild<Enter>
 
 " Find remapping
-nnoremap <Leader>f :find
+nnoremap <Leader>f :find 
 
 " Tagbar remappings
 nnoremap <leader>t :TagbarToggle<CR>
