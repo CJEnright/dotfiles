@@ -9,6 +9,7 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.vim/plugged')
+	Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 	Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 	Plug 'tpope/vim-surround'
 	Plug 'tpope/vim-fugitive'
@@ -75,9 +76,9 @@ autocmd BufRead,BufNewFile *.md setlocal spell  " Turn on spell check in md file
 " Tab complete settings
 set wildmenu  " Enable command line completions
 " wildmode defines how to show completions
-" longest:full  Show wildmenu with completions
-" full          Complete to next full match, wrap around at end
-set wildmode=longest:full,full
+" list:full  When more than one match, list them all and select the first
+" full       Complete to next full match, wrap around at end of options
+set wildmode=list:full,full
 " complete defines where to look for possible completions
 " .  Scan current buffer
 " w  Scan other windows
@@ -87,9 +88,8 @@ set wildmode=longest:full,full
 " t  Scan tag files
 set complete=.,w,b,u,t,i
 " completeopt defines how to show insertion mode completions
-" longest  Match longest common text
-" menu     Show completion menu, unless there's only one option
-set completeopt=longest,menu
+" menu  Show completion menu, unless there's only one option
+set completeopt=menu
 
 " Hit tab to start autocomplete when typing, otherwise just insert a tab
 function! Tab_Or_Complete()
@@ -148,9 +148,15 @@ let g:vimwiki_list = [{'path': '~/Code/notes',
 
 let g:tagbar_compact=1    " Make tagbar take up less space
 
+let NERDTreeShowHidden=1  " Show hidden files
+let NERDTreeMinimalUI=1   " Make NERDTree take up less space
+let NERDTreeIgnore = ['.DS_Store', 'tags', 'tags.lock']
+
 let g:go_fmt_command="goimports"  " Run Go imports on save
 
 let mapleader=" "         " Use <Space> as the leader key
+
+map <C-n> ;NERDTreeToggle<CR>
 
 " Normal mode remappings
 nnoremap ; :
@@ -160,7 +166,6 @@ nnoremap <Leader><Leader> <C-^>
 nnoremap <Leader>j :w<Enter>
 nnoremap <Leader>k :wq<Enter>
 nnoremap <silent> <Leader>/ :nohlsearch<CR>
-nnoremap <leader>n :Vexplore<CR>
 
 " Insert mode remappings
 inoremap jk <Esc>`^
