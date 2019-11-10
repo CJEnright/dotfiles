@@ -6,9 +6,7 @@ BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 mkdir ~/.config
 
 # vim
-mkdir ~/.vim
-mkdir ~/.vim/plugged
-ln -fs ${BASEDIR}/vimrc ~/.vim/vimrc
+ln -fs ${BASEDIR}/vim/* ~/.vim
 
 # zsh
 ln -fs ${BASEDIR}/zshrc ~/.zshrc
