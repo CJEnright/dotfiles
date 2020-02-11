@@ -19,3 +19,5 @@
 	b = branch
 	co = checkout
 	l = log -n 25 --graph --abbrev-commit --pretty=format:'%Cred%an%Creset %C(yellow)%h%Creset %s %Cblue(%cr)%Creset'
+[commit]
+  #gpgsign = true

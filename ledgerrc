@@ -1,5 +1,0 @@
---exchange $
---sort date
---effective
---real
---file ~/.ledger/journal.dat
