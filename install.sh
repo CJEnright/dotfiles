@@ -4,7 +4,6 @@ BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # Make directories we'll need
 mkdir ~/.config
-mkdir ~/.config/nvim
 
 # vim
 ln -fs ${BASEDIR}/vim ~/.vim
@@ -24,5 +23,5 @@ mkdir -p ~/.config/karabiner
 ln -fs ${BASEDIR}/karabiner.json ~/.config/karabiner/karabiner.json
 
 # hammerspoon
-mkdir ~/.hammerspoon
+mkdir -p ~/.hammerspoon
 ln -fs ${BASEDIR}/hammerspoon/init.lua ~/.hammerspoon/init.lua
