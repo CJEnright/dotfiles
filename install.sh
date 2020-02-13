@@ -25,3 +25,8 @@ ln -fs ${BASEDIR}/karabiner.json ~/.config/karabiner/karabiner.json
 # hammerspoon
 mkdir -p ~/.hammerspoon
 ln -fs ${BASEDIR}/hammerspoon/init.lua ~/.hammerspoon/init.lua
+
+# Mail stuff
+ln -fs ${BASEDIR}/offlineimaprc ~/.offlineimaprc
+mkdir -p ~/.mutt
+ln -fs ${BASEDIR}/mutt ~/

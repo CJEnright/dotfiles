@@ -1,0 +1,36 @@
+# Take from https://stevelosh.com/blog/2012/10/the-homely-mutt/
+
+[general]
+ui = ttyui
+accounts = EnrightCJ99
+pythonfile=~/.mutt/offlineimap.py
+
+[Account EnrightCJ99]
+localrepository = EnrightCJ99-Local
+remoterepository = EnrightCJ99-Remote
+postsynchook = notmuch new
+
+[Repository EnrightCJ99-Local]
+type = Maildir
+localfolders = ~/.mail/enrightcj99-gmail.com
+nametrans = lambda folder: {'drafts':  '[Gmail]/Drafts',
+                            'sent':    '[Gmail]/Sent Mail',
+                            'flagged': '[Gmail]/Starred',
+                            'trash':   '[Gmail]/Trash',
+                            'archive': '[Gmail]/All Mail',
+                            }.get(folder, folder)
+
+[Repository EnrightCJ99-Remote]
+maxconnections = 1
+type = Gmail
+remoteuser = enrightcj99@gmail.com
+remotepasseval = get_keychain_pass(account="enrightcj99@gmail.com", server="imap.gmail.com")
+realdelete = no
+nametrans = lambda folder: {'[Gmail]/Drafts':    'drafts',
+                            '[Gmail]/Sent Mail': 'sent',
+                            '[Gmail]/Starred':   'flagged',
+                            '[Gmail]/Trash':     'trash',
+                            '[Gmail]/All Mail':  'archive',
+                            }.get(folder, folder)
+ssl=true
+sslcacertfile = /usr/local/etc/openssl/cert.pem
