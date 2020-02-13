@@ -5,6 +5,9 @@ BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # Make directories we'll need
 mkdir ~/.config
 
+# alacritty
+ln -fs ${BASEDIR}/alacritty ~/.config/alacritty
+
 # vim
 ln -fs ${BASEDIR}/vim ~/.vim
 
