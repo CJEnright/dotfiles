@@ -170,7 +170,7 @@ map <C-n> ;NERDTreeToggle<CR>
 " Normal mode remappings
 nnoremap ; :
 nnoremap : ;
-nnoremap <leader>w <C-w>
+nnoremap <Leader>w <C-w>
 nnoremap <Leader><Leader> <C-^>
 nnoremap <Leader>j :w<Enter>
 nnoremap <Leader>k :wq<Enter>
@@ -201,3 +201,15 @@ autocmd VimResized * :wincmd =
 
 " Highlight merge conflict markers
 match Todo '\v^(\<|\=|\>){7}([^=].+)?$'
+
+nnoremap <Leader>h :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
+      \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
+      \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
+
+colorscheme mono-blue
+
+if exists('+termguicolors')
+  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+  set termguicolors
+endif
