@@ -32,6 +32,8 @@ call plug#begin('~/.vim/plugged')
   Plug 'derekwyatt/vim-scala'
 call plug#end()
 
+colorscheme bw
+
 " Filetype detection
 filetype on         " Enable detecting filetype
 filetype plugin on  " Load plugin file (if there is one) for this filetype
@@ -205,11 +207,3 @@ match Todo '\v^(\<|\=|\>){7}([^=].+)?$'
 nnoremap <Leader>h :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
       \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
       \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
-
-colorscheme mono-blue
-
-if exists('+termguicolors')
-  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-  set termguicolors
-endif
