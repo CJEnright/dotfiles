@@ -42,6 +42,7 @@ filetype indent on  " Use language dependent indenting
 au! FileType css,scss setl iskeyword+=- " Make hyphens part of words in CSS files
 
 " Miscellaneous settings
+set rulerformat=%=%l\:%c        " %=: align right, %l: line number, %c: column number
 set ruler                       " Show cursor stats in bottom left
 set confirm                     " Prompt when trying to quit without saving
 set autoread                    " Automatically read files
@@ -111,6 +112,39 @@ function! Tab_Or_Complete()
   endif
 endfunction
 imap <Tab> <C-R>=Tab_Or_Complete()<CR>
+
+function MyTabLine()
+  let s = ''
+  for i in range(tabpagenr('$'))
+    " select the highlighting
+    if i + 1 == tabpagenr()
+      let s .= '%#TabLineSel#'
+    else
+      let s .= '%#TabLine#'
+    endif
+
+    " set the tab page number (for mouse clicks)
+    let s .= '%' . (i + 1) . 'T'
+
+    let buflist = tabpagebuflist(i+1)
+    let winnr = tabpagewinnr(i+1)
+    let bufname = bufname(buflist[winnr - 1])
+    let label = empty(bufname) ? '[No Name]' : bufname
+    let s .= ' ' . label . ' '
+  endfor
+
+  " after the last tab fill with TabLineFill and reset tab page nr
+  let s .= '%#TabLineFill#%T'
+
+  " right-align the label to close the current tab page
+  if tabpagenr('$') > 1
+    let s .= '%=%#TabLine#%999X'
+  endif
+
+  return s
+endfunction
+
+set tabline=%!MyTabLine()
 
 " Temporary files
 " Instead of having a bunch of these floating around, centralize them
