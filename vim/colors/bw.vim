@@ -73,6 +73,7 @@ if s:mode == s:dark_mode
   let s:gui_fg_highlight = s:grey0
 
   let s:todo_bg = s:grey7
+  let s:visual_bg = s:grey6
   let s:pmenu_bg = s:grey2
 
   " If StatusLine and StatusLineNC are the same, vim puts '^'s in the active
@@ -129,8 +130,6 @@ hi! link ColorColumn VertSplit
 hi! link StatusLine VertSplit
 call s:h("StatusLineNC", { "bg": s:status_line_hack })
 
-call s:h("CursorLine", {})
-
 call s:h("Special", { "fg": s:special })
 hi! link SpecialKey     Special
 hi! link Tag            Special
@@ -148,6 +147,10 @@ call s:h("PMenuSbar",  { "bg": s:pmenu_bg                                   })
 call s:h("PMenuThumb", { "bg": s:gui_bg_highlight                           })
 hi! link WildMenu PMenuSel
 
+call s:h("Todo", { "fg": s:stmt, "bg": s:todo_bg })
+call s:h("Visual", { "bg": s:visual_bg })
+hi! link CursorLine Visual
+
 call s:h("Underlined", extend( { "fg": s:special}, s:underline))
 
 call s:h("Search", { "fg": s:invisible, "bg": s:obnoxious })
@@ -157,8 +160,6 @@ call s:h("Comment", { "fg": s:comment })
 
 call s:h("LineNr", { "fg": s:line_num })
 call s:h("CursorLineNr", { "fg": s:obnoxious })
-
-call s:h("Todo", { "fg": s:stmt, "bg": s:todo_bg })
 
 call s:h("SpellBad", s:underline)
 hi! link SpellRare  SpellBad

@@ -11,6 +11,9 @@ ln -fs ${BASEDIR}/alacritty ~/.config/alacritty
 # vim
 ln -fs ${BASEDIR}/vim ~/.vim
 
+# neovim
+ln -fs ${BASEDIR}/nvim ~/.config/nvim
+
 # zsh
 ln -fs ${BASEDIR}/zshrc ~/.zshrc
 

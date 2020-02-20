@@ -19,7 +19,7 @@ else
 endif
 
 call plug#begin('~/.vim/plugged')
-  Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+  Plug 'scrooloose/nerdtree'
   Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
   Plug 'tpope/vim-surround'
   Plug 'tpope/vim-fugitive'
@@ -28,6 +28,8 @@ call plug#begin('~/.vim/plugged')
   Plug 'vimwiki/vimwiki'
   Plug 'sheerun/vim-polyglot'
   Plug 'neoclide/coc.nvim', { 'branch': 'release' }
+
+  " Remove after CS352
   Plug 'scalameta/coc-metals', {'do': 'yarn install --frozen-lockfile'}
   Plug 'derekwyatt/vim-scala'
 call plug#end()
@@ -146,6 +148,10 @@ endfunction
 
 set tabline=%!MyTabLine()
 
+" Set up session saving options
+"set sessionoptions=blank,buffers,curdir,folds,help,resize,tabpages,winpos,winsize,terminal
+let g:session_dir = $HOME.'/.vim/files/session'
+
 " Temporary files
 " Instead of having a bunch of these floating around, centralize them
 " Create temp files directory if needed
@@ -156,6 +162,8 @@ if !isdirectory($HOME.'/.vim/files') && exists('*mkdir')
   call mkdir($HOME.'/.vim/files/swap')
   call mkdir($HOME.'/.vim/files/undo')
   call mkdir($HOME.'/.vim/files/info')
+
+  call mkdir(g:session_dir)
 endif
 
 " Creates a backup of a file when you open it
@@ -179,7 +187,10 @@ set undodir=$HOME/.vim/files/undo/  " Directory for undo files
 " /1000 Store up to 1000 searches
 " :1000 Store up to 1000 commands
 " Last argument is where viminfo is stored
-set viminfo=%,<1000,'100,/1000,:1000,n$HOME/.vim/files/info/viminfo
+if !has('nvim')
+  set viminfo+=%,<1000,'100,/1000,:1000,n$HOME/.vim/files/info/viminfo
+endif
+
 
 " Jump to the line a file was at when it was closed
 if has("autocmd")
@@ -241,3 +252,7 @@ match Todo '\v^(\<|\=|\>){7}([^=].+)?$'
 nnoremap <Leader>h :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
       \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
       \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
+
+if argc()==0
+  au VimEnter * call session#load()
+endif
