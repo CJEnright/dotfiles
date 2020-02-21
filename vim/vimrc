@@ -225,9 +225,6 @@ nnoremap <silent> <Leader>/ :nohlsearch<CR>
 " Insert mode remappings
 inoremap jk <Esc>`^
 
-" vim-go remappings
-nnoremap <Leader>s :GoBuild<Enter>
-
 " Find remapping
 nnoremap <Leader>f :find 
 

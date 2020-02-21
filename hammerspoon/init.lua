@@ -1,11 +1,14 @@
-local ctrl_cmd = {"cmd", "ctrl"}
+local hyper = {"cmd", "ctrl", "shift", "option"}
 local switcher = hs.window.switcher.new()
 
 -- Disable animations
 hs.window.animationDuration = 0
 
+-- Reserved hyper keys:
+-- c, a, u, n, p, h, j, k, l, w, space
+
 -- Switch monitors (if there are any)
-hs.hotkey.bind(ctrl_cmd, "m", function()
+hs.hotkey.bind(hyper, "m", function()
 	local win = hs.window.focusedWindow()
 	local screen = win:screen()
 
@@ -13,7 +16,7 @@ hs.hotkey.bind(ctrl_cmd, "m", function()
 end)
 
 -- Maximize current window
-hs.hotkey.bind(ctrl_cmd, "f", function()
+hs.hotkey.bind(hyper, "f", function()
 	local win = hs.window.focusedWindow()
 	local f = win:frame()
 	local screen = win:screen()
@@ -27,7 +30,7 @@ hs.hotkey.bind(ctrl_cmd, "f", function()
 end)
 
 -- Put current window to left half of screen
-hs.hotkey.bind(ctrl_cmd, "d", function()
+hs.hotkey.bind(hyper, "d", function()
 	local win = hs.window.focusedWindow()
 	local f = win:frame()
 	local screen = win:screen()
@@ -41,7 +44,7 @@ hs.hotkey.bind(ctrl_cmd, "d", function()
 end)
 
 -- Put current screen to right half of screen
-hs.hotkey.bind(ctrl_cmd, "g", function()
+hs.hotkey.bind(hyper, "g", function()
 	local win = hs.window.focusedWindow()
 	local f = win:frame()
 	local screen = win:screen()
@@ -52,4 +55,12 @@ hs.hotkey.bind(ctrl_cmd, "g", function()
 	f.w = max.w / 2
 	f.h = max.h
 	win:setFrame(f)
+end)
+
+hs.hotkey.bind(hyper, "t", function()
+  hs.application.launchOrFocus("Alacritty")
+end)
+
+hs.hotkey.bind(hyper, "b", function()
+  hs.application.launchOrFocus("Firefox")
 end)
