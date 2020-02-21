@@ -30,10 +30,8 @@ function! session#save() abort
   let noop=system('echo "\" __sess_dir='. getcwd() . '" >> ' . args)
 endfunction
 
-" TODO this should only load in if there's no args passed to vim
-" and some other conditions probs
-function! session#load() abort
-  let fname = g:session_dir . '/' . getcwd() . '/Session.vim'
+function! session#load(dir) abort
+  let fname = g:session_dir . '/' . a:dir . '/Session.vim'
   let hash = systemlist(s:md5 . ' -qs ' . fname)[0]
   let fname = g:session_dir . '/' . hash . '.vim'
 
@@ -44,9 +42,9 @@ function! session#load() abort
   catch
     call inputsave()
     echo 'Failed to open session, [I]gnore  or [D]elete it?'
-    let choice=getchar()
+    let choice=nr2char(getchar())
     call inputrestore()
-    if choice==#'d'
+    if choice ==# 'd'
       call delete(fname)
     endif
   endtry
@@ -54,11 +52,24 @@ function! session#load() abort
   echo ""
 endfunction
 
+function! session#auto_load() abort
+  session#load(getcwd())
+endfunction
+
+function! session#dir_has_session(dir) abort
+  let fname = g:session_dir . '/' . a:dir . '/Session.vim'
+  let hash = systemlist(s:md5 . ' -qs ' . fname)[0]
+  let fname = g:session_dir . '/' . hash . '.vim'
+
+  return filereadable(fname)
+endfunction
+
 function! session#get_n_most_recent(n) abort
   let files=systemlist('ls -t ' . g:session_dir . ' | head -' . a:n)
-  let ret=[]
+  let ret = []
+  let i = 0
   for i in files
-    call add(ret, trim(systemlist('grep __sess_dir= ' . g:session_dir . '/' . files[i] . ' | cut -c 14-')[-1]))
+    call add(ret, trim(systemlist('grep __sess_dir= ' . g:session_dir . '/' . i . ' | cut -c 14-')[-1]))
   endfor
   return ret
 endfunction

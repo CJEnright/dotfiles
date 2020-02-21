@@ -216,7 +216,6 @@ map <C-n> ;NERDTreeToggle<CR>
 
 " Normal mode remappings
 nnoremap ; :
-nnoremap : ;
 nnoremap <Leader>w <C-w>
 nnoremap <Leader><Leader> <C-^>
 nnoremap <Leader>j :w<Enter>
@@ -254,5 +253,5 @@ nnoremap <Leader>h :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") .
       \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 
 if argc()==0
-  au VimEnter * call session#load()
+  au VimEnter * call splash#splash()
 endif
