@@ -33,6 +33,9 @@ defaults write com.apple.dock autohide-delay -float 0
 echo 'Setting     dock icon size to 45 pixels'
 defaults write com.apple.dock tilesize -int 45
 
+echo 'Disabling   apps bouncing in the dock'
+defaults write com.apple.dock no-bouncing -bool TRUE;
+
 echo 'Enabling    sub pixel font rendering on non-Apple LCDs'
 defaults write NSGlobalDomain AppleFontSmoothing -int 2
 

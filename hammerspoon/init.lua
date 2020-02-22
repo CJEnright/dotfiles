@@ -5,7 +5,7 @@ local switcher = hs.window.switcher.new()
 hs.window.animationDuration = 0
 
 -- Reserved hyper keys:
--- c, a, u, n, p, h, j, k, l, w, r, v, space
+-- c, a, u, n, p, h, j, k, l, w, r, v, [, ], space
 
 -- Switch monitors (if there are any)
 hs.hotkey.bind(hyper, "m", function()
@@ -16,7 +16,7 @@ hs.hotkey.bind(hyper, "m", function()
 end)
 
 -- Maximize current window
-hs.hotkey.bind(hyper, "\\", function()
+hs.hotkey.bind(hyper, "3", function()
 	local win = hs.window.focusedWindow()
 	local f = win:frame()
 	local screen = win:screen()
@@ -30,7 +30,7 @@ hs.hotkey.bind(hyper, "\\", function()
 end)
 
 -- Put current window to left half of screen
-hs.hotkey.bind(hyper, "[", function()
+hs.hotkey.bind(hyper, "1", function()
 	local win = hs.window.focusedWindow()
 	local f = win:frame()
 	local screen = win:screen()
@@ -44,7 +44,7 @@ hs.hotkey.bind(hyper, "[", function()
 end)
 
 -- Put current screen to right half of screen
-hs.hotkey.bind(hyper, "]", function()
+hs.hotkey.bind(hyper, "2", function()
 	local win = hs.window.focusedWindow()
 	local f = win:frame()
 	local screen = win:screen()

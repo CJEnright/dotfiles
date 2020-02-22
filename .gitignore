@@ -3,3 +3,5 @@ vim/spell
 vim/autoload
 vim/plugged
 vim/.netrwhist
+
+Brewfile.lock.json
