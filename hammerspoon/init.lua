@@ -16,7 +16,7 @@ hs.hotkey.bind(hyper, "m", function()
 end)
 
 -- Maximize current window
-hs.hotkey.bind(hyper, "f", function()
+hs.hotkey.bind(hyper, "\\", function()
 	local win = hs.window.focusedWindow()
 	local f = win:frame()
 	local screen = win:screen()
@@ -30,7 +30,7 @@ hs.hotkey.bind(hyper, "f", function()
 end)
 
 -- Put current window to left half of screen
-hs.hotkey.bind(hyper, "d", function()
+hs.hotkey.bind(hyper, "[", function()
 	local win = hs.window.focusedWindow()
 	local f = win:frame()
 	local screen = win:screen()
@@ -44,7 +44,7 @@ hs.hotkey.bind(hyper, "d", function()
 end)
 
 -- Put current screen to right half of screen
-hs.hotkey.bind(hyper, "g", function()
+hs.hotkey.bind(hyper, "]", function()
 	local win = hs.window.focusedWindow()
 	local f = win:frame()
 	local screen = win:screen()
