@@ -5,7 +5,7 @@ local switcher = hs.window.switcher.new()
 hs.window.animationDuration = 0
 
 -- Reserved hyper keys:
--- c, a, u, n, p, h, j, k, l, w, r, v, [, ], space
+-- c, a, u, n, p, h, j, k, l, w, r, v, [, ], o, i, space
 
 -- Switch monitors (if there are any)
 hs.hotkey.bind(hyper, "m", function()
