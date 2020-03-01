@@ -4,7 +4,7 @@ endif
 let g:loaded_splash = 1
 
 " Easy to reach keys
-let s:keys = ['j', 'k', 'f', 'd', 's', 'h', 'g', 'w', 'n']
+let s:keys = ['j', 'k', 'f', 'd', 's', 'h', 'g', 'n']
 
 function! splash#splash()
   enew
@@ -48,6 +48,14 @@ function! splash#splash()
       let ln += 1
     endfor
   endif
+
+  call append(ln, '')
+  let ln += 1
+  call append(ln, '')
+  let ln += 1
+  call append(ln, '    [w] ' . fnamemodify("~/Code/notes/index.md", ":~:."))
+  let ln += 1
+  nnoremap <buffer><silent> w :VimwikiIndex<CR>
 
   nnoremap <buffer><silent> a :enew <bar> startinsert<CR>
   nnoremap <buffer><silent> i :enew <bar> startinsert<CR>
