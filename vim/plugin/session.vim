@@ -1,3 +1,4 @@
+" TODO this could be a lot faster if there was one central file stored in ~/.vim
 if exists("g:loaded_session")
   finish
 endif
