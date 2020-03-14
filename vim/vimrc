@@ -148,10 +148,6 @@ endfunction
 
 set tabline=%!MyTabLine()
 
-" Set up session saving options
-"set sessionoptions=blank,buffers,curdir,folds,help,resize,tabpages,winpos,winsize,terminal
-let g:session_dir = $HOME.'/.vim/files/session'
-
 " Temporary files
 " Instead of having a bunch of these floating around, centralize them
 " Create temp files directory if needed
@@ -162,8 +158,6 @@ if !isdirectory($HOME.'/.vim/files') && exists('*mkdir')
   call mkdir($HOME.'/.vim/files/swap')
   call mkdir($HOME.'/.vim/files/undo')
   call mkdir($HOME.'/.vim/files/info')
-
-  call mkdir(g:session_dir)
 endif
 
 " Creates a backup of a file when you open it
@@ -248,7 +242,3 @@ match Todo '\v^(\<|\=|\>){7}([^=].+)?$'
 nnoremap <Leader>h :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
       \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
       \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
-
-if argc()==0
-  au VimEnter * call splash#splash()
-endif
