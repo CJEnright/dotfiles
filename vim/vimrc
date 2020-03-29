@@ -29,7 +29,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'sheerun/vim-polyglot'
   Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 
-  " Remove after CS352
+  " TODO Remove after CS352
   Plug 'scalameta/coc-metals', {'do': 'yarn install --frozen-lockfile'}
   Plug 'derekwyatt/vim-scala'
 call plug#end()
