@@ -103,3 +103,4 @@ if [ -f '/Users/cj/Documents/google-cloud-sdk/completion.zsh.inc' ]; then . '/Us
 export PATH="/usr/local/sbin:$PATH"
 
 export GPG_TTY=$(tty)
+export PATH="/usr/local/opt/node@10/bin:$PATH"

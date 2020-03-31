@@ -30,7 +30,6 @@ call plug#begin('~/.vim/plugged')
   Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 
   " TODO Remove after CS352
-  Plug 'scalameta/coc-metals', {'do': 'yarn install --frozen-lockfile'}
   Plug 'derekwyatt/vim-scala'
 call plug#end()
 
