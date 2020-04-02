@@ -1,12 +1,13 @@
 # Aliases
 alias l="ls -F"
 alias m="less"
-alias v="vim"
+alias v="nvim"
 alias t="tmux"
 alias g="git"
 
 alias la="ls -la"
 alias sshp="ssh cenrigh@moore08.cs.purdue.edu"
+alias vim="nvim"
 
 # ls whenever you cd
 function cd() {
@@ -64,7 +65,7 @@ setopt HIST_REDUCE_BLANKS      # Remove blank lines from each command added to h
 setopt HIST_VERIFY             # Don't execute immediately on history expansion
 setopt INC_APPEND_HISTORY      # Write to history file immediately, not when shell quits
 
-EDITOR=vim
+EDITOR=nvim
 bindkey -v
 bindkey 'jk' vi-cmd-mode  # Enter vi mode on 'jk'
 

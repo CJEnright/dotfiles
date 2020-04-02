@@ -24,13 +24,13 @@ call plug#begin('~/.vim/plugged')
   Plug 'tpope/vim-surround'
   Plug 'tpope/vim-fugitive'
   Plug 'ludovicchabant/vim-gutentags'
-  Plug 'majutsushi/tagbar'
-  Plug 'vimwiki/vimwiki'
-  Plug 'sheerun/vim-polyglot'
-  Plug 'neoclide/coc.nvim', { 'branch': 'release' }
+  "Plug 'majutsushi/tagbar'
+  "Plug 'vimwiki/vimwiki'
+  "Plug 'sheerun/vim-polyglot'
+  "Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 
   " TODO Remove after CS352
-  Plug 'derekwyatt/vim-scala'
+  "Plug 'derekwyatt/vim-scala'
 call plug#end()
 
 colorscheme bw
@@ -99,7 +99,7 @@ set wildmode=list:full,full
 " u  Scan unloaded buffers in the buffer list
 " i  Scan included files
 " t  Scan tag files
-set complete=.,w,b,u,t,i
+set complete=.
 " completeopt defines how to show insertion mode completions
 " menu  Show completion menu, unless there's only one option
 set completeopt=menu
@@ -226,7 +226,7 @@ inoremap jk <Esc>`^
 nnoremap <Leader>f :find 
 
 " Tagbar remappings
-nnoremap <leader>t :TagbarToggle<CR>
+"nnoremap <leader>t :TagbarToggle<CR>
 
 " Remapping things to noop so they get out of the way
 nnoremap <_> <Plug>Vimwiki2HTML
