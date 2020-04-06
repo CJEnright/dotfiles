@@ -16,5 +16,6 @@ Thumbs.db
 tags
 tags.lock
 tags.temp
+compile_commands.json
 
 __pycache__/

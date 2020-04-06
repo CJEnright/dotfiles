@@ -216,7 +216,6 @@ map <C-n> ;NERDTreeToggle<CR>
 
 let g:LanguageClient_serverCommands = {
       \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
-      \ 'c': ['/usr/local/opt/llvm/bin/clangd'],
       \ }
 
 let g:LanguageClient_diagnosticsList=0
@@ -235,6 +234,21 @@ endfunction
 
 autocmd FileType * call s:ls_remaps()
 
+" Zettel
+let g:zettel_dir = '~/Code/notes/zettel'
+let g:zettel_template = '# %Title_link\n
+                       \\n
+                       \## Backlinks\n
+                       \\n
+                       \## Notes\n
+                       \\n
+                       \\n
+                       \\n
+                       \\n
+                       \\n
+                       \## Tags'
+
+
 " Normal mode remappings
 nnoremap ; :
 nnoremap <Leader>w <C-w>
@@ -242,6 +256,7 @@ nnoremap <Leader><Leader> <C-^>
 nnoremap <Leader>j :w<Enter>
 nnoremap <Leader>k :wq<Enter>
 nnoremap <silent> <Leader>/ :nohlsearch<CR>
+nnoremap <Leader>z :call zettel#prompt_new()<CR>
 
 " Insert mode remappings
 inoremap jk <Esc>`^
