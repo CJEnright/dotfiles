@@ -13,7 +13,7 @@ endfunction
 
 function! zettel#new(name)
   let timestamp = systemlist('date +\%s')[0]
-  let fname = substitute(a:name, ' ', '_', 'g') . timestamp . '.md'
+  let fname = tolower(substitute(a:name, ' ', '_', 'g') . '_' . timestamp . '.md')
   let fpath = g:zettel_dir . '/' . fname
 
   let fcontents = substitute(g:zettel_template, '%Title', a:name, 'g')

@@ -248,7 +248,6 @@ let g:zettel_template = '# %Title_link\n
                        \\n
                        \## Tags'
 
-
 " Normal mode remappings
 nnoremap ; :
 nnoremap <Leader>w <C-w>
@@ -281,6 +280,6 @@ autocmd VimResized * :wincmd =
 " Highlight merge conflict markers
 match Todo '\v^(\<|\=|\>){7}([^=].+)?$'
 
-nnoremap <Leader>h :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
-      \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
-      \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
+if argc()==0
+  au VimEnter * call splash#splash()
+endif
