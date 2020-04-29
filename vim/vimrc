@@ -24,15 +24,7 @@ Plug 'scrooloose/nerdtree'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
-Plug 'vimwiki/vimwiki'
 Plug 'sheerun/vim-polyglot'
-Plug 'autozimu/LanguageClient-neovim', {
-      \ 'branch': 'next',
-      \ 'do': 'bash install.sh',
-      \ }
-
-" TODO Remove after CS352
-Plug 'derekwyatt/vim-scala'
 
 call plug#end()
 
@@ -46,14 +38,14 @@ filetype indent on  " Use language dependent indenting
 au! FileType css,scss setl iskeyword+=- " Make hyphens part of words in CSS files
 
 " Miscellaneous settings
-set rulerformat=%=%l\:%c        " %=: align right, %l: line number, %c: column number
+set rulerformat=%=%l\:%c        " %= -> align right, %l -> line number, %c -> column number
 set ruler                       " Show cursor stats in bottom left
 set confirm                     " Prompt when trying to quit without saving
 set autoread                    " Automatically read files
 set autowrite                   " Automatically write files
 set splitright                  " Open new splits to the right of the current one
 set scrolloff=5                 " Always show at least 5 lines on top or bottom 
-set fillchars=vert:\            " Don't put characters in split divider
+set fillchars=vert:\            " Don't put characters in split dividers
 set backspace=indent,eol,start  " Make backspace like a normal editor
 
 " Searching
@@ -65,6 +57,8 @@ set smartcase  " Only use case when search has capitals
 " Find settings
 set path+=**                       " Let :find search sub directories
 set wildignore+=**/node_modules/** " Make :find ignore node_modules
+set wildignore+=**/bin/**          " Make :find ignore bin
+set wildignore+=**/target/**       " Make :find ignore bin
 
 " Tabs and indention
 set expandtab     " Type spaces when you hit tab
@@ -82,12 +76,12 @@ syntax on                             " Enable syntax highlighting
 set background=dark                   " Use a dark background
 set cursorline                        " Highlight line cursor is on
 hi CursorLine cterm=NONE ctermbg=240  " Set cursorline color to light grey
-hi clear SpellBad                     " Reset spell checker color
-hi SpellBad cterm=underline           " Underline misspelled words
 
 " Spell checking
-set spelllang=en_us  " Use English spell checking
-set spell            " Enable spell checking
+set spelllang=en_us          " Use English spell checking
+set spell                    " Enable spell checking
+hi clear SpellBad            " Reset spell checker color
+hi SpellBad cterm=underline  " Underline misspelled words
 
 " Tab complete settings
 set wildmenu  " Enable command line completions
@@ -102,7 +96,7 @@ set wildmode=list:full,full
 " u  Scan unloaded buffers in the buffer list
 " i  Scan included files
 " t  Scan tag files
-set complete=.
+set complete=.,w,b
 " completeopt defines how to show insertion mode completions
 " menu  Show completion menu, unless there's only one option
 set completeopt=menu
@@ -160,81 +154,47 @@ if !isdirectory($HOME.'/.vim/files') && exists('*mkdir')
   call mkdir($HOME.'/.vim/files/swap')
   call mkdir($HOME.'/.vim/files/undo')
   call mkdir($HOME.'/.vim/files/info')
-  call mkdir($HOME.'/.vim/files/tags')
 endif
 
 " Creates a backup of a file when you open it
-set backup                               " Use backup files 
-set backupext =-vimbackup                " Extension for backup files
-set backupskip=/tmp/*,/private/tmp/*     " Directories to not use backup files
-set backupdir =$HOME/.vim/files/backup/  " Directory for backup files
+set backup                              " Use backup files 
+set backupext=-vimbackup                " Extension for backup files
+set backupskip=/tmp/*,/private/tmp/*    " Directories to not use backup files
+set backupdir=$HOME/.vim/files/backup/  " Directory for backup files
 
 " Swap files, stores changes made to buffers. Can be used to recover on crash
-set updatecount=100                      " Number of chars until swap is written
-set directory  =$HOME/.vim/files/swap//  " Double slash means use full path
+set directory=$HOME/.vim/files/swap//  " Double slash means use full path
 
 " Stores undo history 
 set undofile                        " Use undo files
 set undodir=$HOME/.vim/files/undo/  " Directory for undo files
 
-" Stores things like search history and registers on quit
-" %     Store buffer list
-" <1000 Store up to 800 lines in each register
-" '100  Store up to 100 file marks
-" /1000 Store up to 1000 searches
-" :1000 Store up to 1000 commands
-" Last argument is where viminfo is stored
 if !has('nvim')
+  " Stores things like search history and registers on quit
+  " %     Store buffer list
+  " <1000 Store up to 800 lines in each register
+  " '100  Store up to 100 file marks
+  " /1000 Store up to 1000 searches
+  " :1000 Store up to 1000 commands
+  " Last argument is where viminfo is stored
   set viminfo+=%,<1000,'100,/1000,:1000,n$HOME/.vim/files/info/viminfo
 endif
 
-
-" Jump to the line a file was at when it was closed
+" Always open files to the line it was at when it was closed
 if has("autocmd")
   au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 endif
-
-" Set vimwiki home path and tell it to use markdown
-let g:vimwiki_list = [{'path': '~/Code/notes',
-      \ 'syntax': 'markdown',
-      \ 'ext': '.md'}]
-
-let g:gutentags_cache_dir = '~/.vim/files/tags/'
-let g:gutentags_exclude_project_root=['/usr/local', '~/Code/Purdue-CS']
-
-let g:tagbar_compact=1    " Make tagbar take up less space
 
 let NERDTreeShowHidden=1  " Show hidden files
 let NERDTreeMinimalUI=1   " Make NERDTree take up less space
 let NERDTreeIgnore = ['.DS_Store', 'tags', 'tags.lock']
 
-let g:go_fmt_command="goimports"  " Run Go imports on save
+let g:go_fmt_command='goimports'  " Run Go imports on save
 
-let mapleader=" "         " Use <Space> as the leader key
+let mapleader=' '         " Use <Space> as the leader key
 
 map <C-n> ;NERDTreeToggle<CR>
 
-let g:LanguageClient_serverCommands = {
-      \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
-      \ }
-
-let g:LanguageClient_diagnosticsList=0
-
-" If this file type has language server support then change some keybinds
-function s:ls_remaps()
-  if has_key(g:LanguageClient_serverCommands, &filetype)
-    nnoremap <buffer> <silent> K :call LanguageClient#textDocument_hover()<cr>
-    nnoremap <buffer> <silent> gd :call LanguageClient#textDocument_definition()<CR>
-    nnoremap <buffer> <silent> <C-]> :call LanguageClient#textDocument_definition()<CR>
-    nnoremap <buffer> <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
-
-    set completefunc=LanguageClient#complete
-  endif
-endfunction
-
-autocmd FileType * call s:ls_remaps()
-
-" Zettel
 let g:zettel_dir = '~/Code/notes/zettel'
 let g:zettel_template = '# %Title_link\n
                        \\n
@@ -250,32 +210,22 @@ let g:zettel_template = '# %Title_link\n
 
 " Normal mode remappings
 nnoremap ; :
-nnoremap <Leader>w <C-w>
-nnoremap <Leader><Leader> <C-^>
+
 nnoremap <Leader>j :w<Enter>
 nnoremap <Leader>k :wq<Enter>
 nnoremap <silent> <Leader>/ :nohlsearch<CR>
+nnoremap <Leader>f :find 
 nnoremap <Leader>z :call zettel#prompt_new()<CR>
+nnoremap <Leader>n :e ~/Code/notes/index.md<Enter>
+
+nnoremap <Leader>w <C-w>
+nnoremap <Leader><Leader> <C-^>
 
 " Insert mode remappings
 inoremap jk <Esc>`^
 
-" Find remapping
-nnoremap <Leader>f :find 
-
-" Tagbar remappings
-"nnoremap <leader>t :TagbarToggle<CR>
-
-" Remapping things to noop so they get out of the way
-nnoremap <_> <Plug>Vimwiki2HTML
-nnoremap <_> <Plug>Vimwiki2HTMLBrowse
-let g:tagbar_map_showproto = '<F18>'
-
 " Expand "dtdy" int today's date
 iab dtdy <c-r>=strftime("%Y-%m-%d")<CR>
-
-" Resize windows when vim is resized
-autocmd VimResized * :wincmd =
 
 " Highlight merge conflict markers
 match Todo '\v^(\<|\=|\>){7}([^=].+)?$'
