@@ -21,9 +21,10 @@ endif
 call plug#begin('~/.vim/plugged')
 
 Plug 'scrooloose/nerdtree'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-fugitive'
 Plug 'sheerun/vim-polyglot'
 
 call plug#end()
@@ -197,26 +198,30 @@ map <C-n> ;NERDTreeToggle<CR>
 
 let g:zettel_dir = '~/Code/notes/zettel'
 let g:zettel_template = '# %Title_link\n
-                       \\n
-                       \## Backlinks\n
-                       \\n
-                       \## Notes\n
-                       \\n
-                       \\n
-                       \\n
-                       \\n
-                       \\n
-                       \## Tags'
+      \\n
+      \## Backlinks\n
+      \\n
+      \## Notes\n
+      \\n
+      \\n
+      \\n
+      \\n
+      \\n
+      \## Tags'
+
+let g:fzf_layout = { 'down': '~20%' }
+let g:fzf_preview_window = ''
 
 " Normal mode remappings
 nnoremap ; :
 
-nnoremap <Leader>j :w<Enter>
-nnoremap <Leader>k :wq<Enter>
+nnoremap <Leader>j :w<CR>
+nnoremap <Leader>k :wq<CR>
 nnoremap <silent> <Leader>/ :nohlsearch<CR>
-nnoremap <Leader>f :find 
 nnoremap <Leader>z :call zettel#prompt_new()<CR>
-nnoremap <Leader>n :e ~/Code/notes/index.md<Enter>
+nnoremap <Leader>n :e ~/Code/notes/index.md<CR>
+nnoremap <Leader>f :Files<CR>
+nnoremap <Leader>r :Rg<CR>
 
 nnoremap <Leader>w <C-w>
 nnoremap <Leader><Leader> <C-^>
