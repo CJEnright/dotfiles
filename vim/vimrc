@@ -189,7 +189,7 @@ let NERDTreeShowHidden=1  " Show hidden files
 let NERDTreeMinimalUI=1   " Make NERDTree take up less space
 let NERDTreeIgnore = ['.DS_Store', 'tags', 'tags.lock']
 
-let g:go_fmt_command='goimports'  " Run Go imports on save
+let g:go_fmt_command='gofmt'  " Run gofmt on save, goimports was too slow
 
 let mapleader=' '         " Use <Space> as the leader key
 
