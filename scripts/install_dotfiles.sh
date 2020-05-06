@@ -1,8 +1,10 @@
 #!/bin/sh
 
-BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+# Installs dotfiles.
 
-# Make directories we'll need
+BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../"
+
+# Make directories we'll need later
 mkdir -p ~/.config
 mkdir -p ~/.mutt
 
@@ -25,6 +27,17 @@ function try_install {
     ln -fs $1 $2
   fi
 }
+
+# macOS specific dotfiles
+if [ "$(uname)" == "Darwin" ]; then
+  # karabiner
+  mkdir -p ~/.config/karabiner
+  ln -fs ${BASEDIR}/karabiner.json ~/.config/karabiner/karabiner.json
+
+  # hammerspoon
+  mkdir -p ~/.hammerspoon
+  ln -fs ${BASEDIR}/hammerspoon/init.lua ~/.hammerspoon/init.lua
+fi
 
 # alacritty
 ALACRITTY_SOURCE=${BASEDIR}/alacritty
@@ -57,12 +70,3 @@ ln -fs ${BASEDIR}/offlineimaprc ~/.offlineimaprc
 MUTT_SOURCE=${BASEDIR}/mutt
 MUTT_TARGET=~/.mutt
 try_install $MUTT_SOURCE $MUTT_TARGET
-
-# karabiner
-mkdir -p ~/.config/karabiner
-ln -fs ${BASEDIR}/karabiner.json ~/.config/karabiner/karabiner.json
-
-# hammerspoon
-mkdir -p ~/.hammerspoon
-ln -fs ${BASEDIR}/hammerspoon/init.lua ~/.hammerspoon/init.lua
-

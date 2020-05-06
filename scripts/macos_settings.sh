@@ -1,25 +1,4 @@
-#!/usr/bin/env bash
-
-echo 'Installing  xcode'
-xcode-select --install
-
-if test ! `which brew`; then
-  echo 'Installing  homebrew'
-  /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-fi
-
-echo 'Updating    homebrew'
-brew update
-
-echo 'Installing  Brewfile'
-brew bundle
-
-echo 'Cleaning    Up brew s mess'
-brew cleanup
-
-echo 'Installing  dotfiles'
-./install.sh
-
+#!/bin/sh
 
 echo 'Enabling    dock auto hide'
 defaults write com.apple.dock autohide -bool true
