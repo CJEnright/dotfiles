@@ -19,3 +19,5 @@ tags.temp
 compile_commands.json
 
 __pycache__/
+
+node_modules/

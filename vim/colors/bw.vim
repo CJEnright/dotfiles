@@ -74,6 +74,7 @@ if s:mode == s:dark_mode
 
   let s:todo_bg = s:grey7
   let s:visual_bg = s:grey6
+  let s:cursor_line = s:grey4
   let s:pmenu_bg = s:grey2
 
   " If StatusLine and StatusLineNC are the same, vim puts '^'s in the active
@@ -149,7 +150,7 @@ hi! link WildMenu PMenuSel
 
 call s:h("Todo", { "fg": s:stmt, "bg": s:todo_bg })
 call s:h("Visual", { "bg": s:visual_bg })
-hi! link CursorLine Visual
+call s:h("CursorLine", { "bg": s:cursor_line })
 
 call s:h("Underlined", extend( { "fg": s:special}, s:underline))
 

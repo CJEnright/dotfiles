@@ -75,7 +75,6 @@ set lazyredraw  " Only redraw when necessary.
 syntax on                             " Enable syntax highlighting
 set background=dark                   " Use a dark background
 set cursorline                        " Highlight line cursor is on
-hi CursorLine cterm=NONE ctermbg=240  " Set cursorline color to light grey
 
 " Spell checking
 set spelllang=en_us          " Use English spell checking
