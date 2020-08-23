@@ -26,6 +26,9 @@ Plug 'junegunn/fzf.vim'
 
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
+" Just for CS 565 (but maybe keep???)
+Plug 'whonore/Coqtail'
+
 call plug#end()
 
 colorscheme bw
@@ -229,6 +232,7 @@ inoremap jk <Esc>`^
 
 " Expand "dtdy" int today's date
 iab dtdy <c-r>=strftime("%Y-%m-%d")<CR>
+iab tsmp <c-r>=strftime("%T")<CR>
 
 " Highlight merge conflict markers
 match Todo '\v^(\<|\=|\>){7}([^=].+)?$'
