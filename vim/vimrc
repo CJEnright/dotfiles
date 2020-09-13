@@ -31,6 +31,12 @@ Plug 'whonore/Coqtail'
 
 call plug#end()
 
+" Enable python support in neovim
+if has('nvim')
+  let g:python_host_prog = '/usr/bin/python'
+  let g:python3_host_prog = '/usr/local/bin/python3'
+endif
+
 " Custom color scheme, defined in ./colors/bw.vim
 colorscheme bw
 

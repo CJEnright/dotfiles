@@ -8,10 +8,6 @@ let s:zettel_template = '# %TitleLink\n
       \\n
       \## Notes\n
       \\n
-      \\n
-      \\n
-      \\n
-      \\n
       \## Backlinks\n
       \\n
       \## Tags'

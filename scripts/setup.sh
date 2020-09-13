@@ -8,7 +8,6 @@ echo 'Installing  dotfiles'
 ${BASEDIR}/install_dotfiles.sh
 
 if [ "$(uname)" == "Darwin" ]; then
-
   echo 'Installing  xcode'
   xcode-select --install
 
@@ -25,6 +24,9 @@ if [ "$(uname)" == "Darwin" ]; then
 
   echo 'Cleaning    Up brews mess'
   brew cleanup
+
+  echo 'Installing  neovim python support'
+  pip3 install neovim
 
   ${BASEDIR}/macos_settings.sh
 #elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
