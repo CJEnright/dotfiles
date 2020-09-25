@@ -70,3 +70,8 @@ ln -fs ${BASEDIR}/offlineimaprc ~/.offlineimaprc
 MUTT_SOURCE=${BASEDIR}/mutt
 MUTT_TARGET=~/.mutt
 try_install $MUTT_SOURCE $MUTT_TARGET
+
+# ctags
+CTAGS_SOURCE=${BASEDIR}/ctags
+CTAGS_TARGET=~/.ctags
+try_install $CTAGS_SOURCE $CTAGS_TARGET
