@@ -71,7 +71,7 @@ if [ -e "${machine}/hardware_configuration.nix" ]; then
 fi
 
 # Copy in common nix files
-cp /dotfiles/nixos/common /mnt/etc/nixos/common
+cp -r /dotfiles/nixos/common /mnt/etc/nixos/common
 
 # Once you boot into your user account make sure to symlink these files using
 # scripts/install_nix.sh

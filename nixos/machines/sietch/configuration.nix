@@ -19,7 +19,7 @@
       preLVM = true;
       allowDiscards = true;
     };
-  }
+  };
 
   system.stateVersion = "20.09";
 }
