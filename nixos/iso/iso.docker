@@ -1,0 +1,17 @@
+FROM nixos/nix
+ARG SSH_PUB_KEY
+
+COPY . .
+
+# Set up pub key
+RUN mkdir -p ~/.ssh
+RUN touch ~/.ssh/id_ed25519.pub
+RUN echo $SSH_PUB_KEY > ~/.ssh/id_ed25519.pub
+
+# Build ISO
+RUN nix-build '<nixpkgs/nixos>' -A config.system.build.isoImage -I nixos-config=iso.nix
+
+# Give everyone r/w permissions on the resulting ISO, otherwise we get some
+# annoying permission errors when copying back to the host.
+RUN chmod -R a+rw /result
+RUN chmod -R a+rw /result/iso

@@ -105,3 +105,4 @@ export PATH="/usr/local/sbin:$PATH"
 
 export GPG_TTY=$(tty)
 export PATH="/usr/local/opt/node@10/bin:$PATH"
+#if [ -e /Users/cj/.nix-profile/etc/profile.d/nix.sh ]; then . /Users/cj/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
