@@ -52,6 +52,10 @@ if [ $do_format == "y" ]; then
   mount ${DISK}p1 /mnt/boot
 fi
 
+# Set up nix configs, we may not use the generated files but they create the
+# structure for the files for us.
+nixos-generate-config --root /mnt
+
 # Make sure we have git installed
 nix-env -i git
 
@@ -64,11 +68,6 @@ cp "${machine}/configuration.nix" /mnt/etc/nixos/configuration.nix
 # Copy hardware_configuration.nix if it exists
 if [ -e "${machine}/hardware_configuration.nix" ]; then
   cp "${machine}/hardware_configuration.nix" /mnt/etc/nixos/hardware_configuration.nix
-else
-  # Have nix generate configs, note that this won't overwrite our
-  # configuration.nix file from the command above. We only do this so nix will
-  # generate a hardware_configuration.nix file.
-  nixos-generate-config --root /mnt
 fi
 
 # Copy in common nix files
