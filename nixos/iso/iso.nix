@@ -29,7 +29,7 @@
   # turns out nix sucks.
   # ANYWAY, include the host ssh key in the iso
   systemd.services.sshd.wantedBy = pkgs.lib.mkForce [ "multi-user.target" ];
-  users.users.root.openssh.authorizedKeys.keyFiles = [
+  users.users.cj.openssh.authorizedKeys.keyFiles = [
     ~/.ssh/id_ed25519.pub
   ];
 

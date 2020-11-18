@@ -6,5 +6,5 @@
   users.users.cj = {
     isNormalUser = true;
     extraGroups = [ "wheel" ]; # Give cj sudo
-  }
+  };
 }
