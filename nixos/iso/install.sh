@@ -9,21 +9,18 @@ set -x
 # Exit on first failure
 set -e
 
-# Image having to type sudo a bunch
-sudo su
-
-read -p "Set up Wi-Fi? [y/n]" do_wifi
+read -p "Set up Wi-Fi? [y/n] " do_wifi
 if [ $do_wifi == "y" ]; then
   read -p "Enter network SSID: " ssid
   read -p "Enter network password: " password
-  wpa_passhrase $ssid $password >> /etc/wpa_supplicant.conf
+  wpa_passphrase $ssid $password >> /etc/wpa_supplicant.conf
   systemctl start wpa_supplicant
 fi
 
 echo "Format and partition ${DISK}?"
 echo "This will erase everything on the disk!"
-read -p "[y/n]" do_format
-if [[ $do_format == "y" ]] then
+read -p "[y/n] " do_format
+if [ $do_format == "y" ]; then
   # Partition disk
   parted -s $DISK mklabel gpt                # Make partition table
   parted -s $DISK mkpart primary 1MiB 512MiB # Boot partition (UEFI, unencrypted)
@@ -31,7 +28,7 @@ if [[ $do_format == "y" ]] then
   parted -s $DISK set 1 boot on              # Set boot flag on partition 1
 
   # Create main encrypted filesystem
-  cryptsetup --type luks2 --verify-passphrase --pbkdf argon2id --iter-time 5000 --hash sha512 --key-size 512 luksFromat ${DISK}p2
+  cryptsetup --type luks2 --verify-passphrase --pbkdf argon2id --iter-time 5000 --hash sha512 --key-size 512 luksFormat ${DISK}p2
   cryptsetup --type luks2 open ${DISK}p2 nix_lvm
   pvcreate --dataalignment 1m /dev/mapper/nix_lvm
   vgcreate nix_vg /dev/mapper/nix_lvm
@@ -58,7 +55,7 @@ fi
 # Make sure we have git installed
 nix-env -i git
 
-git -C /dotfiles clone https://github.com/cjenright/dotfiles
+git -C / clone https://github.com/cjenright/dotfiles
 select machine in /dotfiles/nixos/machines/*/; do break; done
 
 # Copy configuration.nix
