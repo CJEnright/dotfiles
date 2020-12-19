@@ -22,9 +22,4 @@
   console = {
     keyMap = "us";
   };
-
-  # Add ssh key for cj
-  users.users.cj.openssh.authorizedKeys.keyFiles = [
-    /etc/ssh_pub_key
-  ];
 }
