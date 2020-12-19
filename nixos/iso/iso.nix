@@ -1,20 +1,8 @@
-# See https://nixos.wiki/wiki/Creating_a_NixOS_live_CD
-# 
 # This creates a custom nix iso.
-# common.nix contains configs that all hardware uses. To actually build an iso
-# you should symlink a *.nix file from ../machines. For example:
-# `$ ln -sf ../machines/sietch.nix configuration.nix`
-# After that you can build the iso:
-#
-# If you're running this on a 64 bit linux system and are targeting a 64 bit
-# linux system, then you can run:
-# `$ nix-build '<nixpkgs/nixos>' -A config.system.build.isoImage -I nixos-config=iso.nix`
-#
-# Otherwise, you can use docker to set up a temporary nix system and produce an
-# iso by running:
-# `$ ./docker_build.sh`
+# See https://nixos.wiki/wiki/Creating_a_NixOS_live_CD
+# For instructions to create the iso, see README.md
 
-{ config, pkgs, ... }:
+{ config, pkgs, sshPubKeyPath, ... }:
 
 {
   imports = [
@@ -25,18 +13,18 @@
     <nixpkgs/nixos/modules/installer/cd-dvd/channel.nix>
   ];
 
-  # I wanted to make this configurable via an --arg passed to nix-build, but
-  # turns out nix sucks.
-  # ANYWAY, include the host ssh key in the iso
+  # Add SSH key from host generating iso as authorized key on target
   systemd.services.sshd.wantedBy = pkgs.lib.mkForce [ "multi-user.target" ];
-  users.users.cj.openssh.authorizedKeys.keyFiles = [
-    ~/.ssh/id_ed25519.pub
-  ];
 
   environment.etc = {
     "install.sh" = {
       source = ./install.sh;
       mode = "0700";
+    };
+
+    "ssh_pub_key" = {
+      source = /ssh_pub_key;
+      mode = "0760";
     };
   };
 }

@@ -1,3 +1,6 @@
+# Uncomment this and the last line of file for profiling
+#zmodload zsh/zprof
+
 # Aliases
 alias l="ls -F"
 alias m="less"
@@ -105,4 +108,6 @@ export PATH="/usr/local/sbin:$PATH"
 
 export GPG_TTY=$(tty)
 export PATH="/usr/local/opt/node@10/bin:$PATH"
-#if [ -e /Users/cj/.nix-profile/etc/profile.d/nix.sh ]; then . /Users/cj/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
+
+# Uncomment this and first line for profiling
+#zprof

@@ -4,11 +4,12 @@ ARG SSH_PUB_KEY
 COPY . .
 
 # Set up pub key
-RUN mkdir -p ~/.ssh
-RUN touch ~/.ssh/id_ed25519.pub
-RUN echo $SSH_PUB_KEY > ~/.ssh/id_ed25519.pub
+# This is definitely a non-standard location (~/.ssh is where they should
+# really go), but this is just a throwaway container so it doesn't matter
+RUN touch /ssh_pub_key
+RUN echo $SSH_PUB_KEY > /ssh_pub_key
 
-# Build ISO
+# Build NixOS iso
 RUN nix-build '<nixpkgs/nixos>' -A config.system.build.isoImage -I nixos-config=iso.nix
 
 # Give everyone r/w permissions on the resulting ISO, otherwise we get some

@@ -15,11 +15,16 @@
   nixpkgs.config.allowUnfree = true;
   hardware.enableRedistributableFirmware = true;
 
-  # Enable trim
+  # Enable trim (imagine not using an SSD)
   services.fstrim.enable = true;
 
   i18n.defaultLocale = "en_US.UTF-8";
   console = {
     keyMap = "us";
   };
+
+  # Add ssh key for cj
+  users.users.cj.openssh.authorizedKeys.keyFiles = [
+    /etc/ssh_pub_key
+  ];
 }

@@ -8,8 +8,7 @@
       ./common/openssh.nix
     ];
 
-  networking.hostName = "sietch";
-  networking.wireless.enable = true;
+  networking.hostName = "mentat";
   networking.interfaces.wlp2s0.useDHCP = true;
 
   # Tell systemd-boot our drive is encrypted
@@ -21,6 +20,5 @@
     };
   };
 
-  services.logind.lidSwitch = "ignore";
   system.stateVersion = "20.09";
 }
