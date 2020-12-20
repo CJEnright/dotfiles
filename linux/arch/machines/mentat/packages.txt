@@ -1,0 +1,12 @@
+zsh
+tmux
+neovim
+nvidia
+curl
+ufw
+dhcpcd
+alacritty
+firefox
+openssh
+xorg-xinit
+xorg
