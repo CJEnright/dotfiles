@@ -25,7 +25,7 @@ EOF
 sed -i "s/^.*issue_discards = 0$/\tissue_discards = 1/g" /mnt/etc/lvm/lvm.conf
 systemctl enable fstrim.timer
 sed -i "$d" /boot/loader/entries/arch.conf # Deletes last line of file
-echo -e "initrd\t/initramfs-linux.img\noptions\tcryptdevice=LABEL=arch_crypt_fs:arch_vg:allow-discards root=/dev/mapper/arch_vg-root rw rd.luks.options=discard" > /boot/loader/entries/arch.conf
+echo -e "initrd\t/initramfs-linux.img\noptions\tcryptdevice=LABEL=arch_crypt_fs:arch_vg:allow-discards root=/dev/mapper/arch_vg-root rw rd.luks.options=discard" >> /boot/loader/entries/arch.conf
 
 # Add any login settings you like, I add:
 # `auth optional pam_faildelay.so delay=3000000`
