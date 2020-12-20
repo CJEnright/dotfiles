@@ -1,40 +1,40 @@
 #!/bin/sh
 
+# Install yay
+pacman -S --needed git base-devel
+git clone https://aur.archlinux.org/yay.git
+cd yay
+makepkg -si
+
+# Set systemd-boot to auto-update
 mkdir -p /etc/pacman.d/hooks/
-echo -e "[Trigger]\nType = Package\nOperation = Upgrade\nTarget = systemd\n\n[Action]\nDescription = Updating systemd-boot\nWhen = PostTransaction\nExec = /usr/bin/bootctl update" > /etc/pacman.d/hooks/100-systemd-boot.hook
+cat <<EOF > /etc/pacman.d/hooks/100-systemd-boot.hook
+[Trigger]
+Type = Package
+Operation = Upgrade
+Target = systemd
 
-useradd --create-home cj
-passwd cj
-usermod -aG wheel cj
-EDITOR=vim visudo
+[Action]
+Description = Updating systemd-boot
+When = PostTransaction
+Exec = /usr/bin/bootctl update
+EOF
 
+# Help out SSDs
+sed -i "s/^.*issue_discards = 0$/\tissue_discards = 1/g" /mnt/etc/lvm/lvm.conf
 systemctl enable fstrim.timer
-vim /etc/lvm/lvm.conf
-vim /boot/loader/entries/arch.conf
+sed -i "$d" /boot/loader/entries/arch.conf # Deletes last line of file
+echo -e "initrd\t/initramfs-linux.img\noptions\tcryptdevice=LABEL=arch_crypt_fs:arch_vg:allow-discards root=/dev/mapper/arch_vg-root rw rd.luks.options=discard" > /boot/loader/entries/arch.conf
 
+# Add any login settings you like, I add:
+# `auth optional pam_faildelay.so delay=3000000`
 vim /etc/pam.d/system-login
 
-systemctl enable dhcpcd.service
-
-pacman -S ufw reflector xorg xorg-init git tmux
-
+# Set up firewalls
 ufw enable
 systemctl enable ufw.service
 ufw default reject
 ufw limit ssh
 
+# Get a better mirror list
 reflector -c "United States" -p http --sort rate --save /etc/pacman.d/mirrorlist
-
-cd /usr/src
-git clone git://git.suckless.org/dwm
-git clone git://git.suckless.org/st
-git clone git://git.suckless.org/dmenu
-
-cd dwm
-sudo make clean install
-cd st
-sudo make clean install
-cd dmenu
-sudo make clean install
-
-echo "exec dwm" > /home/cj/.xinitrc
