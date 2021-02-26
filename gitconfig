@@ -1,7 +1,7 @@
 # This is Git's per-user configuration file.
 [user]
 	name = CJ Enright
-	email = cenrigh@purdue.edu
+	email = cje@aaichicago.com
 	signingkey = 7A17441E75976F0C03AF357A57A2DBEBCEBE0FCF
 [filter "lfs"]
 	clean = git-lfs clean -- %f
@@ -20,5 +20,3 @@
 	b = branch
 	co = checkout
 	l = log -n 25 --graph --abbrev-commit --pretty=format:'%Cred%an%Creset %C(yellow)%h%Creset %s %Cblue(%cr)%Creset'
-[commit]
-	gpgsign = true

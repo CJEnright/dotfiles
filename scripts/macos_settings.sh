@@ -75,15 +75,6 @@ defaults write com.apple.Safari IncludeDevelopMenu -bool true
 defaults write com.apple.Safari WebKitDeveloperExtrasEnabledPreferenceKey -bool true
 defaults write com.apple.Safari "com.apple.Safari.ContentPageGroupIdentifier.WebKit2DeveloperExtrasEnabled" -bool true
 
-# Photoanalysisd is used by photos too look for faces and other stuff I'll
-# never use/have never asked for.  And, as a bonus to it's non existent
-# functionality, it usually uses 100% of a CPU. Fun! The best part is, I don't
-# even have photos on this computer _but it still runs for hours (or days)_.
-# Thanks, Apple!
-echo 'Disabling   photoanalysisd from ever rearing its ugly head'
-launchctl disable gui/$UID/com.apple.photoanalysisd && launchctl kill -TERM gui/$UID/com.apple.photoanalysisd
-launchctl disable user/$UID/com.apple.photoanalysisd && launchctl kill -TERM user/$UID/com.apple.photoanalysisd
-
 killall Dock
 killall Finder
 

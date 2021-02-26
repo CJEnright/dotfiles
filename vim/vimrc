@@ -26,9 +26,6 @@ Plug 'junegunn/fzf.vim'
 
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
-" Just for CS 565 (but maybe keep???)
-Plug 'whonore/Coqtail'
-
 call plug#end()
 
 " Enable python support in neovim
