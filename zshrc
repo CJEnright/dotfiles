@@ -55,17 +55,16 @@ zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 
 # History settings
 HISTFILE=~/.zhistory
-HISTSIZE=10000
+HISTSIZE=999999999
 SAVEHIST=$HISTSIZE
 setopt APPEND_HISTORY          # allow multiple sessions to append to one history
 setopt BANG_HIST               # Treat ! special during command expansion
+setopt HIST_VERIFY             # Don't execute immediately on history expansion (! commands)
 setopt EXTENDED_HISTORY        # Write history in :start:elasped;command format
-setopt HIST_EXPIRE_DUPS_FIRST  # Expire duplicates first when trimming history
-setopt HIST_FIND_NO_DUPS       # When searching history, dont repeat
+setopt HIST_FIND_NO_DUPS       # When searching history, don't repeat
 setopt HIST_IGNORE_DUPS        # Ignore duplicate entries of previous events
 setopt HIST_IGNORE_SPACE       # Prefix command with a space to skip its recording
 setopt HIST_REDUCE_BLANKS      # Remove blank lines from each command added to history
-setopt HIST_VERIFY             # Don't execute immediately on history expansion
 setopt INC_APPEND_HISTORY      # Write to history file immediately, not when shell quits
 
 EDITOR=nvim
@@ -108,6 +107,7 @@ export PATH="/usr/local/sbin:$PATH"
 
 export GPG_TTY=$(tty)
 export PATH="/usr/local/opt/node@10/bin:$PATH"
+
 
 # Uncomment this and first line for profiling
 #zprof

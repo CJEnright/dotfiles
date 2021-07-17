@@ -1,8 +1,7 @@
 # This is Git's per-user configuration file.
 [user]
-	name = CJ Enright
-	email = cje@aaichicago.com
-	signingkey = 7A17441E75976F0C03AF357A57A2DBEBCEBE0FCF
+  name = CJ Enright
+  email = cje@aaichicago.com
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f

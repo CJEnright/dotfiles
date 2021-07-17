@@ -24,7 +24,9 @@ Plug 'scrooloose/nerdtree'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'neovim/nvim-lspconfig'
+
+Plug 'whonore/Coqtail'
 
 call plug#end()
 
@@ -193,19 +195,23 @@ endif
 if has("autocmd")
   au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 endif
+"
+" Leave paste mode when leaving insert mode
+autocmd InsertLeave * set nopaste
 
+" Configure NERDTree
 let NERDTreeShowHidden=1  " Show hidden files
 let NERDTreeMinimalUI=1   " Make NERDTree take up less space
 let NERDTreeIgnore = ['.DS_Store', 'tags', 'tags.lock']
-
-let g:go_fmt_command='gofmt'  " Run gofmt on save, goimports was too slow
 
 let mapleader=' '  " Use <Space> as the leader key
 
 map <C-n> ;NERDTreeToggle<CR>
 
+" Configure zettel plugin
 let g:zettel_dir = '~/Code/notes/zettel'
 
+" Make fzf layout a little nicer
 let g:fzf_layout = { 'down': '~20%' }
 let g:fzf_preview_window = ''
 
@@ -239,7 +245,50 @@ iab tsmp <c-r>=strftime("%T")<CR>
 " Highlight git merge conflict markers
 match Todo '\v^(\<|\=|\>){7}([^=].+)?$'
 
-" If we started vim with no arguments, then show custom splash screen
+" If we started vim with no arguments, show custom splash screen
 if argc()==0
   au VimEnter * call splash#splash()
 endif
+
+lua <<EOF
+local nvim_lsp = require('nvim_lsp')
+local on_attach = function(client, bufnr)
+end
+
+nvim_lsp.rust_analyzer.setup({
+  on_attach=on_attach,
+  settings = {
+    ["rust-analyzer"] = {
+      assist = {
+        importGranularity = "module",
+        importPrefix = "by_self",
+        },
+      cargo = {
+        loadOutDirsFromCheck = true
+        },
+      procMacro = {
+      enable = true
+      },
+    }
+  }
+})
+
+vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+  vim.lsp.diagnostic.on_publish_diagnostics,
+  {
+      underline = false
+  }
+)
+EOF
+
+nnoremap <silent> <c-]> <cmd>lua vim.lsp.buf.definition()<CR>
+nnoremap <silent> K     <cmd>lua vim.lsp.buf.hover()<CR>
+nnoremap <silent> gD    <cmd>lua vim.lsp.buf.implementation()<CR>
+nnoremap <silent> <c-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
+nnoremap <silent> 1gD   <cmd>lua vim.lsp.buf.type_definition()<CR>
+nnoremap <silent> gr    <cmd>lua vim.lsp.buf.references()<CR>
+nnoremap <silent> g0    <cmd>lua vim.lsp.buf.document_symbol()<CR>
+nnoremap <silent> gW    <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
+nnoremap <silent> gd    <cmd>lua vim.lsp.buf.declaration()<CR>
+
+set mmp=50000

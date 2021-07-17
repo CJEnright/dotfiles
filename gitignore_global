@@ -21,3 +21,10 @@ compile_commands.json
 __pycache__/
 
 node_modules/
+
+*.vo
+*.aux
+*.glob
+
+
+.idea/
