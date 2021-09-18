@@ -251,7 +251,7 @@ if argc()==0
 endif
 
 lua <<EOF
-local nvim_lsp = require('nvim_lsp')
+local nvim_lsp = require('lspconfig')
 local on_attach = function(client, bufnr)
 end
 
@@ -262,12 +262,12 @@ nvim_lsp.rust_analyzer.setup({
       assist = {
         importGranularity = "module",
         importPrefix = "by_self",
-        },
+      },
       cargo = {
         loadOutDirsFromCheck = true
-        },
+      },
       procMacro = {
-      enable = true
+        enable = false
       },
     }
   }
