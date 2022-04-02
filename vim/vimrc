@@ -31,10 +31,10 @@ Plug 'whonore/Coqtail'
 call plug#end()
 
 " Enable python support in neovim
-if has('nvim')
-  let g:python_host_prog = '/usr/bin/python'
-  let g:python3_host_prog = '/usr/local/bin/python3'
-endif
+"if has('nvim')
+"  let g:python_host_prog = '/usr/local/bin/python3'
+"  let g:python3_host_prog = '/usr/local/bin/python3'
+"endif
 
 " Custom color scheme, defined in ./colors/bw.vim
 colorscheme bw
@@ -202,7 +202,7 @@ autocmd InsertLeave * set nopaste
 " Configure NERDTree
 let NERDTreeShowHidden=1  " Show hidden files
 let NERDTreeMinimalUI=1   " Make NERDTree take up less space
-let NERDTreeIgnore = ['.DS_Store', 'tags', 'tags.lock']
+let NERDTreeIgnore = ['.DS_Store', 'tags', 'tags.lock', '__pycache__']
 
 let mapleader=' '  " Use <Space> as the leader key
 
@@ -279,7 +279,15 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
       underline = false
   }
 )
+
+require'lspconfig'.sourcekit.setup{}
 EOF
+
+augroup filetype
+  au! BufRead,BufNewFile *.swift set ft=swift
+augroup END
+
+autocmd FileType swift setlocal omnifunc=lsp#complete
 
 nnoremap <silent> <c-]> <cmd>lua vim.lsp.buf.definition()<CR>
 nnoremap <silent> K     <cmd>lua vim.lsp.buf.hover()<CR>

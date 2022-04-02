@@ -9,6 +9,7 @@
 	required = true
 [core]
 	excludesfile = /Users/cj/.gitignore_global
+	editor = nvim
 [url "git@github.com:"]
   insteadOf = https://github.com/
 [alias]
@@ -19,3 +20,4 @@
 	b = branch
 	co = checkout
 	l = log -n 25 --graph --abbrev-commit --pretty=format:'%Cred%an%Creset %C(yellow)%h%Creset %s %Cblue(%cr)%Creset'
+  f = fetch

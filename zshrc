@@ -12,6 +12,14 @@ alias la="ls -la"
 alias sshp="ssh cenrigh@moore08.cs.purdue.edu"
 alias vim="nvim"
 
+# Python 2 is dead to me
+alias python="python3"
+alias pip="pip3"
+
+# "It just works"
+alias brew86="arch -x86_64 /usr/local/bin/brew"
+alias pyenv86="arch -x86_64 pyenv"
+
 # ls whenever you cd
 function cd() {
 	builtin cd "$@" && ls -F
@@ -108,6 +116,10 @@ export PATH="/usr/local/sbin:$PATH"
 export GPG_TTY=$(tty)
 export PATH="/usr/local/opt/node@10/bin:$PATH"
 
+# Add keys to ssh agent
+ssh-add > /dev/null 2>&1
+
+eval "$(pyenv init -)"
 
 # Uncomment this and first line for profiling
 #zprof

@@ -65,13 +65,13 @@ ln -fs ${BASEDIR}/gitconfig ~/.gitconfig
 ln -fs ${BASEDIR}/gitignore_global ~/.gitignore_global
 
 # Mail stuff
-ln -fs ${BASEDIR}/offlineimaprc ~/.offlineimaprc
+#ln -fs ${BASEDIR}/offlineimaprc ~/.offlineimaprc
 
-MUTT_SOURCE=${BASEDIR}/mutt
-MUTT_TARGET=~/.mutt
-try_install $MUTT_SOURCE $MUTT_TARGET
+#MUTT_SOURCE=${BASEDIR}/mutt
+#MUTT_TARGET=~/.mutt
+#try_install $MUTT_SOURCE $MUTT_TARGET
 
 # ctags
-CTAGS_SOURCE=${BASEDIR}/ctags
-CTAGS_TARGET=~/.ctags
-try_install $CTAGS_SOURCE $CTAGS_TARGET
+#CTAGS_SOURCE=${BASEDIR}/ctags
+#CTAGS_TARGET=~/.ctags
+#try_install $CTAGS_SOURCE $CTAGS_TARGET
