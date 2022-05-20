@@ -115,6 +115,8 @@ export PATH="/usr/local/sbin:$PATH"
 
 export GPG_TTY=$(tty)
 export PATH="/usr/local/opt/node@10/bin:$PATH"
+export PATH="/Users/cj/.local/bin:$PATH"
+export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
 
 # Add keys to ssh agent
 ssh-add > /dev/null 2>&1
