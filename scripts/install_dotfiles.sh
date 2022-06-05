@@ -64,6 +64,9 @@ ln -fs ${BASEDIR}/tmux.conf ~/.tmux.conf
 ln -fs ${BASEDIR}/gitconfig ~/.gitconfig
 ln -fs ${BASEDIR}/gitignore_global ~/.gitignore_global
 
+# .env
+ln -fs ${BASEDIR}/.env ~/.env
+
 # Mail stuff
 #ln -fs ${BASEDIR}/offlineimaprc ~/.offlineimaprc
 

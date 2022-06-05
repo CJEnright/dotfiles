@@ -121,6 +121,10 @@ export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
 # Add keys to ssh agent
 ssh-add > /dev/null 2>&1
 
+set -o allexport
+source ~/.env
+set +o allexport
+
 eval "$(pyenv init -)"
 
 # Uncomment this and first line for profiling
