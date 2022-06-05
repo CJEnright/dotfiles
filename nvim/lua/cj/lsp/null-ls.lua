@@ -1,4 +1,4 @@
-local null_ls = require("lspconfig")
+local null_ls = require("null-ls")
 
 local M = {}
 
