@@ -6,6 +6,3 @@ require "cj.options"
 require "cj.keymap"
 require "cj.autocomplete"
 require "cj.lsp"
-
-require'nvim-tree'.setup {
-}

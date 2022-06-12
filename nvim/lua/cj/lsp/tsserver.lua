@@ -1,9 +1,7 @@
-local lspconfig = require("lspconfig")
-
 local M = {}
 
 M.setup = function(on_attach, capabilities)
-  lspconfig.tsserver.setup({
+  require("lspconfig")["tsserver"].setup({
     server = {
       on_attach = function(client, bufnr)
         local ts_utils = require("nvim-lsp-ts-utils")

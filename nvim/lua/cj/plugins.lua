@@ -26,10 +26,9 @@ vim.cmd [[
 ]]
 
 return packer.startup(function(use)
+  use "lewis6991/impatient.nvim"
   use "wbthomason/packer.nvim"
   use "nvim-lua/plenary.nvim"
-  use "kyazdani42/nvim-web-devicons"
-  use "kyazdani42/nvim-web-devicons"
   use "kyazdani42/nvim-tree.lua"
 
   -- Completion

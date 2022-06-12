@@ -13,12 +13,14 @@ vim.opt.splitbelow = true
 vim.opt.scrolloff = 5
 -- Always show at least 5 characters to the left or right
 vim.opt.sidescrolloff = 5
--- Don't put characters in split dividers
-vim.opt.fillchars = "vert: "
 -- Interval for writing swap file to disk, also used by gitsigns
 vim.opt.updatetime = 250
--- Disable tilde on end of buffer
-vim.opt.fillchars = { eob = " " }
+vim.opt.fillchars = {
+  -- Don't put characters in split dividers
+  vert = " ",
+  -- Disable tilde on end of buffer
+  eob = " "
+}
 
 -- Search
 -- Search highlighting
@@ -98,3 +100,19 @@ vim.cmd [[
       autocmd BufReadPost \* if line("'\\"") > 1 && line("'\\"") <= line("$") | exe "normal! g`\"" | call timer\_start(1, {tid -> execute("normal! zz")})  | endif  
   augroup END
 ]]
+
+-- Plugin options
+
+require'nvim-tree'.setup {
+  renderer = {
+    icons = {
+      show = {
+        file = false,
+        folder = false,
+        git = false
+      }
+    }
+  }
+}
+
+

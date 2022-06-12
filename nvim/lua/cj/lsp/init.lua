@@ -19,6 +19,7 @@ local on_attach = function(client, bufnr)
   vim.cmd("command! LspSignatureHelp lua vim.lsp.buf.signature_help()")
 
   buf_map(bufnr, "n", "gd", ":LspDef<CR>")
+  buf_map(bufnr, "n", "<C-]>", ":LspDef<CR>")
   buf_map(bufnr, "n", "gr", ":LspRename<CR>")
   buf_map(bufnr, "n", "gy", ":LspTypeDef<CR>")
   buf_map(bufnr, "n", "K", ":LspHover<CR>")
@@ -35,10 +36,10 @@ end
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
 
-for _, server in ipairs({
-  "tsserver",
-  "null-ls",
-}) do
-require("cj.lsp." .. server).setup(on_attach, capabilities)
+local servers = { "tsserver", "null-ls", "rust-analyzer" }
+--local servers = { "rust-analyzer" }
+for _, server in pairs(servers) do
+  require("cj.lsp." .. server).setup(on_attach, capabilities)
 end
+
 
