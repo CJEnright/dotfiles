@@ -12,14 +12,6 @@ alias la="ls -la"
 alias sshp="ssh cenrigh@moore08.cs.purdue.edu"
 alias vim="nvim"
 
-# Python 2 is dead to me
-alias python="python3"
-alias pip="pip3"
-
-# "It just works"
-alias brew86="arch -x86_64 /usr/local/bin/brew"
-alias pyenv86="arch -x86_64 pyenv"
-
 # ls whenever you cd
 function cd() {
 	builtin cd "$@" && ls -F
@@ -103,14 +95,9 @@ export GOBIN=$GOPATH/bin
 export PATH="$GOBIN:$PATH"
 
 export PATH="$HOME/.cargo/bin:$PATH"
-export PATH="$HOME/Library/Python/3.7/bin:$PATH"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/cj/Documents/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/cj/Documents/google-cloud-sdk/path.zsh.inc'; fi
-# The next line enables shell command completion for gcloud.
-if [ -f '/Users/cj/Documents/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/cj/Documents/google-cloud-sdk/completion.zsh.inc'; fi
 export PATH="/usr/local/sbin:$PATH"
 
 export GPG_TTY=$(tty)
@@ -124,8 +111,6 @@ ssh-add > /dev/null 2>&1
 set -o allexport
 source ~/.env
 set +o allexport
-
-eval "$(pyenv init -)"
 
 # Uncomment this and first line for profiling
 #zprof

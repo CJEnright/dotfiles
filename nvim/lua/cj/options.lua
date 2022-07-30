@@ -112,6 +112,13 @@ require'nvim-tree'.setup {
         git = false
       }
     }
+  },
+  actions = {
+    open_file = {
+      window_picker = {
+        enable = false
+      }
+    }
   }
 }
 
