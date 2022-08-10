@@ -10,6 +10,8 @@ local buf_command = function(bufnr, name, fn, opts)
   vim.api.nvim_buf_create_user_command(bufnr, name, fn, opts or {})
 end
 
+local formatting_augroup = vim.api.nvim_create_augroup("LspFormatting", {})
+
 local on_attach = function(client, bufnr)
   vim.cmd("command! LspDef lua vim.lsp.buf.definition()")
   vim.cmd("command! LspFormatting lua vim.lsp.buf.formatting()")
@@ -25,6 +27,7 @@ local on_attach = function(client, bufnr)
   vim.cmd("command! LspSignatureHelp lua vim.lsp.buf.signature_help()")
 
   buf_map(bufnr, "n", "gd", ":LspDef<CR>")
+  buf_map(bufnr, "n", "gl", ":LspRefs<CR>")
   buf_map(bufnr, "n", "<C-]>", ":LspDef<CR>")
   buf_map(bufnr, "n", "gr", ":LspRename<CR>")
   buf_map(bufnr, "n", "gy", ":LspTypeDef<CR>")
@@ -49,13 +52,20 @@ local on_attach = function(client, bufnr)
       })
     end)
 
-    vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
+    vim.api.nvim_clear_autocmds({ group = formatting_augroup, buffer = bufnr })
     vim.api.nvim_create_autocmd("BufWritePre", {
-      group = augroup,
+      group = formatting_augroup,
       buffer = bufnr,
       command = "LspFormatting",
     })
   end
+
+  -- Kinda nasty but best way I could find to do this
+  vim.cmd([[
+    if exists(":EslintFixAll")
+      autocmd BufWritePre *.tsx,*.ts,*.jsx,*.js EslintFixAll
+    endif
+  ]])
 end
 -- Servers that don't need any additional config
 local default_servers = { "prismals", "jsonls", "yamlls", "cssls", "tailwindcss", "dockerls", "bashls", "rust_analyzer"  }
@@ -67,7 +77,7 @@ table.foreach(default_servers, function(k, v) table.insert(all_servers, v) end)
 table.foreach(custom_servers, function(k, v) table.insert(all_servers, v) end)
 
 require("mason-lspconfig").setup({
-	ensure_installed = all_servers,
+  ensure_installed = all_servers,
 })
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()

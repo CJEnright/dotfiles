@@ -36,7 +36,7 @@ vim.opt.smartcase = true
 
 -- Indentation
 -- Type spaces when you hit tab
-vim.opt.expandtab = true
+--vim.opt.expandtab = true
 -- Copy indention depth on new line
 vim.opt.autoindent = true
 -- Tabs take up 2 columns
