@@ -21,6 +21,8 @@ vim.opt.fillchars = {
   -- Disable tilde on end of buffer
   eob = " "
 }
+-- Imagine using a mouse
+vim.opt.mouse = ""
 
 -- Search
 -- Search highlighting
@@ -110,6 +112,12 @@ require'nvim-tree'.setup {
         file = false,
         folder = false,
         git = false
+      },
+      glyphs = {
+        folder = {
+          arrow_closed = "▸",
+          arrow_open = "▾"
+        }
       }
     }
   },
@@ -119,6 +127,9 @@ require'nvim-tree'.setup {
         enable = false
       }
     }
+  },
+  view = {
+    side = "right"
   }
 }
 

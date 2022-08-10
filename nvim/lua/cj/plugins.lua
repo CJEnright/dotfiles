@@ -32,16 +32,20 @@ return packer.startup(function(use)
   use "kyazdani42/nvim-tree.lua"
 
   -- Completion
-  use "hrsh7th/nvim-cmp" -- The completion plugin
-  use "hrsh7th/cmp-buffer" -- buffer completions
-  use "hrsh7th/cmp-path" -- path completions
-  use "hrsh7th/cmp-cmdline" -- cmdline completions
-  use "saadparwaiz1/cmp_luasnip" -- snippet completions
+  use "hrsh7th/nvim-cmp"
+  use "hrsh7th/cmp-buffer"
+  use "hrsh7th/cmp-path"
+  use "hrsh7th/cmp-cmdline"
   use "hrsh7th/cmp-nvim-lsp"
+  use "hrsh7th/cmp-copilot"
+  use "github/copilot.vim"
 
   -- LSP
   use "neovim/nvim-lspconfig" -- enable LSP
   use "jose-elias-alvarez/null-ls.nvim"
+  use "jose-elias-alvarez/typescript.nvim"
+  use "williamboman/mason.nvim"
+  use "williamboman/mason-lspconfig.nvim"
 
   -- Telescope
   use "nvim-telescope/telescope.nvim"
@@ -52,7 +56,20 @@ return packer.startup(function(use)
     run = ":TSUpdate",
   }
 
-  use "jose-elias-alvarez/typescript.nvim"
+  use {
+    "lewis6991/gitsigns.nvim",
+    config = function()
+      require('gitsigns').setup {
+        signs = {
+          add          = {hl = 'GitSignsAdd'   , text = '▐', numhl='GitSignsAddNr'   , linehl='GitSignsAddLn'},
+          change       = {hl = 'GitSignsChange', text = '▐', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
+          delete       = {hl = 'GitSignsDelete', text = '▐', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn'},
+          topdelete    = {hl = 'GitSignsDelete', text = '▐', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn'},
+          changedelete = {hl = 'GitSignsChange', text = '▐', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
+        },
+      }
+    end
+  }
 
 
   -- If we just downloaded packer, install plugins

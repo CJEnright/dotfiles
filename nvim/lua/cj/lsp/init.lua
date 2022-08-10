@@ -1,3 +1,5 @@
+require("mason").setup()
+
 local buf_map = function(bufnr, mode, lhs, rhs, opts)
   vim.api.nvim_buf_set_keymap(bufnr, mode, lhs, rhs, opts or {
     silent = true,
@@ -7,7 +9,6 @@ end
 local buf_command = function(bufnr, name, fn, opts)
   vim.api.nvim_buf_create_user_command(bufnr, name, fn, opts or {})
 end
-
 
 local on_attach = function(client, bufnr)
   vim.cmd("command! LspDef lua vim.lsp.buf.definition()")
@@ -56,13 +57,30 @@ local on_attach = function(client, bufnr)
     })
   end
 end
+-- Servers that don't need any additional config
+local default_servers = { "prismals", "jsonls", "yamlls", "cssls", "tailwindcss", "dockerls", "bashls", "rust_analyzer"  }
+-- Servers with custom options
+local custom_servers = { "tsserver",  "eslint", "null-ls", }
+
+local all_servers = {}
+table.foreach(default_servers, function(k, v) table.insert(all_servers, v) end)
+table.foreach(custom_servers, function(k, v) table.insert(all_servers, v) end)
+
+require("mason-lspconfig").setup({
+	ensure_installed = all_servers,
+})
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
 
-local servers = { "tsserver",  "eslint", "null-ls", "rust-analyzer" }
-for _, server in pairs(servers) do
-  require("cj.lsp." .. server).setup(on_attach, capabilities)
+for _, server in ipairs(default_servers) do
+  require("lspconfig")[server].setup {
+    on_attach = on_attach,
+    capabilities = capabilities
+  }
 end
 
+for _, server in pairs(custom_servers) do
+  require("cj.lsp." .. server).setup(on_attach, capabilities)
+end
 

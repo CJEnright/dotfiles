@@ -14,7 +14,6 @@ M.setup = function(on_attach, capabilities)
         buf_map(bufnr, "n", "gO", ":TypescriptOrganizeImports<CR>")
         buf_map(bufnr, "n", "gI", ":TypescriptRenameFile<CR>")
 
-
         on_attach(client, bufnr)
       end,
       capabilities = capabilities,

@@ -11,9 +11,8 @@ keymap("n", "<Leader>w", "<C-w>", nore)
 keymap("n", "<Leader><Leader>", "<C-^>", nore)
 
 -- Telescope
-keymap("n", "<Leader>ff", ":Telescope find_files<CR>", nore)
-keymap("n", "<Leader>fg", ":Telescope live_grep<CR>", nore)
-keymap("n", "<Leader>fb", ":Telescope buffers<CR>", nore)
+keymap("n", "<Leader>f", ":Telescope find_files<CR>", nore)
+keymap("n", "<Leader>r", ":Telescope live_grep<CR>", nore)
 
 -- nvim-tree
 keymap("n", "<C-n>", ":NvimTreeToggle<CR>", nore)
