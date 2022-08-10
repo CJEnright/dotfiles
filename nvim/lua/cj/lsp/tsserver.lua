@@ -1,20 +1,19 @@
 local M = {}
 
+local buf_map = function(bufnr, mode, lhs, rhs, opts)
+  vim.api.nvim_buf_set_keymap(bufnr, mode, lhs, rhs, opts or {
+    silent = true,
+  })
+end
+
 M.setup = function(on_attach, capabilities)
-  require("lspconfig")["tsserver"].setup({
+  require("typescript").setup({
     server = {
       on_attach = function(client, bufnr)
-        local ts_utils = require("nvim-lsp-ts-utils")
-        ts_utils.setup({})
-        ts_utils.setup_client(client)
+        buf_map(bufnr, "n", "go", ":TypescriptAddMissingImports<CR>")
+        buf_map(bufnr, "n", "gO", ":TypescriptOrganizeImports<CR>")
+        buf_map(bufnr, "n", "gI", ":TypescriptRenameFile<CR>")
 
-        buf_map(bufnr, "n", "gs", ":TSLspOrganize<CR>")
-        buf_map(bufnr, "n", "gi", ":TSLspRenameFile<CR>")
-        buf_map(bufnr, "n", "go", ":TSLspImportAll<CR>")
-
-        -- Disable formatting (handled by null-ls)
-        client.resolved_capabilities.document_formatting = false
-        client.resolved_capabilities.document_range_formatting = false
 
         on_attach(client, bufnr)
       end,

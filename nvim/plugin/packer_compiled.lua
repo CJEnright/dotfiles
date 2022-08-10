@@ -109,11 +109,6 @@ _G.packer_plugins = {
     path = "/Users/cj/.local/share/nvim/site/pack/packer/start/nvim-cmp",
     url = "https://github.com/hrsh7th/nvim-cmp"
   },
-  ["nvim-lsp-ts-utils"] = {
-    loaded = true,
-    path = "/Users/cj/.local/share/nvim/site/pack/packer/start/nvim-lsp-ts-utils",
-    url = "https://github.com/jose-elias-alvarez/nvim-lsp-ts-utils"
-  },
   ["nvim-lspconfig"] = {
     loaded = true,
     path = "/Users/cj/.local/share/nvim/site/pack/packer/start/nvim-lspconfig",
@@ -143,6 +138,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/cj/.local/share/nvim/site/pack/packer/start/telescope.nvim",
     url = "https://github.com/nvim-telescope/telescope.nvim"
+  },
+  ["typescript.nvim"] = {
+    loaded = true,
+    path = "/Users/cj/.local/share/nvim/site/pack/packer/start/typescript.nvim",
+    url = "https://github.com/jose-elias-alvarez/typescript.nvim"
   }
 }
 

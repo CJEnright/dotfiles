@@ -4,6 +4,11 @@ local buf_map = function(bufnr, mode, lhs, rhs, opts)
   })
 end
 
+local buf_command = function(bufnr, name, fn, opts)
+  vim.api.nvim_buf_create_user_command(bufnr, name, fn, opts or {})
+end
+
+
 local on_attach = function(client, bufnr)
   vim.cmd("command! LspDef lua vim.lsp.buf.definition()")
   vim.cmd("command! LspFormatting lua vim.lsp.buf.formatting()")
@@ -28,16 +33,34 @@ local on_attach = function(client, bufnr)
   buf_map(bufnr, "n", "ga", ":LspCodeAction<CR>")
   buf_map(bufnr, "n", "<Leader>a", ":LspDiagLine<CR>")
 
-  if client.resolved_capabilities.document_formatting then
-    vim.cmd("autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()")
+  if client.supports_method("textDocument/formatting") then
+    buf_command(bufnr, "LspFormatting", function()
+      vim.lsp.buf.format({
+        bufnr = bufnr,
+        filter = function(client)
+          -- Use eslint instead of tsserver
+          if client.name == "tsserver" then
+            return false
+          end
+
+          return true
+        end
+      })
+    end)
+
+    vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
+    vim.api.nvim_create_autocmd("BufWritePre", {
+      group = augroup,
+      buffer = bufnr,
+      command = "LspFormatting",
+    })
   end
 end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
 
-local servers = { "tsserver", "null-ls", "rust-analyzer" }
---local servers = { "rust-analyzer" }
+local servers = { "tsserver",  "eslint", "null-ls", "rust-analyzer" }
 for _, server in pairs(servers) do
   require("cj.lsp." .. server).setup(on_attach, capabilities)
 end

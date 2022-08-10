@@ -42,7 +42,6 @@ return packer.startup(function(use)
   -- LSP
   use "neovim/nvim-lspconfig" -- enable LSP
   use "jose-elias-alvarez/null-ls.nvim"
-  use "jose-elias-alvarez/nvim-lsp-ts-utils"
 
   -- Telescope
   use "nvim-telescope/telescope.nvim"
@@ -52,6 +51,8 @@ return packer.startup(function(use)
     "nvim-treesitter/nvim-treesitter",
     run = ":TSUpdate",
   }
+
+  use "jose-elias-alvarez/typescript.nvim"
 
 
   -- If we just downloaded packer, install plugins
