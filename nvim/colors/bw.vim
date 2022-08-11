@@ -66,7 +66,7 @@ if s:mode == s:dark_mode
   let s:stmt     = s:white
   let s:line_num = s:grey11
 
-  let s:gui_bg = s:black
+  let s:gui_bg = s:grey1
   let s:gui_fg = s:grey19
 
   let s:gui_bg_highlight = s:grey20
@@ -169,7 +169,7 @@ hi! link SpellLocal SpellBad
 " More annoying than helpful, just hide it
 call s:h("SpellCap", s:none)
 
-call s:h("SignColumn", { "bg": s:gui_bg })
-call s:h("GitSignsAdd", { "bg": s:gui_bg})
-call s:h("GitSignsChange", { "bg": s:gui_bg})
-call s:h("GitSignsDelete", { "bg": s:gui_bg})
+call s:h("SignColumn", { "bg": s:invisible })
+call s:h("GitSignsAdd", { "bg": s:invisible })
+call s:h("GitSignsChange", { "bg": s:invisible })
+call s:h("GitSignsDelete", { "bg": s:invisible })

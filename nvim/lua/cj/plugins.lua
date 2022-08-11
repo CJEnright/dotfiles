@@ -43,7 +43,6 @@ return packer.startup(function(use)
   -- LSP
   use "neovim/nvim-lspconfig" -- enable LSP
   use "jose-elias-alvarez/null-ls.nvim"
-  use "jose-elias-alvarez/typescript.nvim"
   use "williamboman/mason.nvim"
   use "williamboman/mason-lspconfig.nvim"
 
@@ -55,6 +54,7 @@ return packer.startup(function(use)
     "nvim-treesitter/nvim-treesitter",
     run = ":TSUpdate",
   }
+  use "pantharshit00/vim-prisma"
 
   use {
     "lewis6991/gitsigns.nvim",
