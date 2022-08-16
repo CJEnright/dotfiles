@@ -94,6 +94,11 @@ _G.packer_plugins = {
     path = "/Users/cj/.local/share/nvim/site/pack/packer/start/cmp-path",
     url = "https://github.com/hrsh7th/cmp-path"
   },
+  ["cmp-snippy"] = {
+    loaded = true,
+    path = "/Users/cj/.local/share/nvim/site/pack/packer/start/cmp-snippy",
+    url = "https://github.com/dcampos/cmp-snippy"
+  },
   ["copilot.vim"] = {
     loaded = true,
     path = "/Users/cj/.local/share/nvim/site/pack/packer/start/copilot.vim",
@@ -134,6 +139,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/cj/.local/share/nvim/site/pack/packer/start/nvim-lspconfig",
     url = "https://github.com/neovim/nvim-lspconfig"
+  },
+  ["nvim-snippy"] = {
+    loaded = true,
+    path = "/Users/cj/.local/share/nvim/site/pack/packer/start/nvim-snippy",
+    url = "https://github.com/dcampos/nvim-snippy"
   },
   ["nvim-tree.lua"] = {
     loaded = true,
