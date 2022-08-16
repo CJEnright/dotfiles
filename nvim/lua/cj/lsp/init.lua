@@ -61,16 +61,13 @@ local on_attach = function(client, bufnr)
   end
 
   -- Kinda nasty but best way I could find to do this
-  vim.cmd([[
-    if exists(":EslintFixAll")
-      autocmd BufWritePre *.tsx,*.ts,*.jsx,*.js EslintFixAll
-    endif
-  ]])
+  vim.cmd("autocmd BufWritePre *.tsx,*.ts,*.jsx,*.js EslintFixAll")
 end
+
 -- Servers that don't need any additional config
 local default_servers = { "prismals", "jsonls", "yamlls", "cssls", "tailwindcss", "dockerls", "bashls", "rust_analyzer"  }
 -- Servers with custom options
-local custom_servers = { "tsserver",  "eslint", "null-ls", }
+local custom_servers = { "tsserver", "null-ls", "eslint"}
 
 local all_servers = {}
 table.foreach(default_servers, function(k, v) table.insert(all_servers, v) end)
