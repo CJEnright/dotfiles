@@ -133,4 +133,10 @@ require'nvim-tree'.setup {
   }
 }
 
+vim.cmd [[
+	" Expand "dtdy" to today's date
+	iab dtdy <c-r>=strftime("%Y-%m-%d")<CR>
 
+	" Expand "tsmp" to the current time (HH:MM:SS, 24 hour format)
+	iab tsmp <c-r>=strftime("%T")<CR>
+]]
