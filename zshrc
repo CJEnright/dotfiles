@@ -7,6 +7,7 @@ alias m="less"
 alias v="nvim"
 alias t="tmux"
 alias g="git"
+alias ghpr="git push -u origin HEAD && gh pr create -w"
 
 alias la="ls -la"
 alias sshp="ssh cenrigh@moore08.cs.purdue.edu"
@@ -114,3 +115,15 @@ set +o allexport
 
 # Uncomment this and first line for profiling
 #zprof
+
+# bun completions
+[ -s "/Users/cj/.bun/_bun" ] && source "/Users/cj/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
+# pnpm
+export PNPM_HOME="/Users/cj/Library/pnpm"
+export PATH="$PNPM_HOME:$PATH"
+# pnpm end
