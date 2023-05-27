@@ -73,12 +73,12 @@ local all_servers = {}
 table.foreach(default_servers, function(k, v) table.insert(all_servers, v) end)
 table.foreach(custom_servers, function(k, v) table.insert(all_servers, v) end)
 
-require("mason-lspconfig").setup({
-  ensure_installed = all_servers,
-})
+-- require("mason-lspconfig").setup({
+--   ensure_installed = all_servers,
+-- })
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
+capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 
 for _, server in ipairs(default_servers) do
   require("lspconfig")[server].setup {
