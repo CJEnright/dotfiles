@@ -59,9 +59,6 @@ local on_attach = function(client, bufnr)
       command = "LspFormatting",
     })
   end
-
-  -- Kinda nasty but best way I could find to do this
-  vim.cmd("autocmd BufWritePre *.tsx,*.ts,*.jsx,*.js EslintFixAll")
 end
 
 -- Servers that don't need any additional config

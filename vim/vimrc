@@ -271,7 +271,7 @@ lspconfig.rust_analyzer.setup({
         loadOutDirsFromCheck = true
       },
       procMacro = {
-        enable = false
+        enable = true
       },
     }
   }

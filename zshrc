@@ -127,3 +127,7 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 export PNPM_HOME="/Users/cj/Library/pnpm"
 export PATH="$PNPM_HOME:$PATH"
 # pnpm end
+[ -f "/Users/cj/.ghcup/env" ] && source "/Users/cj/.ghcup/env" # ghcup-env
+
+
+export PATH="$HOMEBREW_PREFIX/opt/make/libexec/gnubin:$PATH"

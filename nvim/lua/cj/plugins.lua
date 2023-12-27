@@ -37,10 +37,10 @@ return packer.startup(function(use)
   use "hrsh7th/cmp-path"
   use "hrsh7th/cmp-cmdline"
   use "hrsh7th/cmp-nvim-lsp"
-  use "hrsh7th/cmp-copilot"
 	use "dcampos/nvim-snippy"
 	use "dcampos/cmp-snippy"
   use "github/copilot.vim"
+  use "hrsh7th/cmp-copilot"
 
   -- LSP
   use "neovim/nvim-lspconfig" -- enable LSP
