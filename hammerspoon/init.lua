@@ -57,10 +57,3 @@ hs.hotkey.bind(hyper, "2", function()
 	win:setFrame(f)
 end)
 
-hs.hotkey.bind(hyper, "t", function()
-  hs.application.launchOrFocus("Alacritty")
-end)
-
-hs.hotkey.bind(hyper, "b", function()
-  hs.application.launchOrFocus("Firefox")
-end)

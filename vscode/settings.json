@@ -1,0 +1,183 @@
+{
+  "vim.leader": "<space>",
+  "vim.insertModeKeyBindings": [
+    {
+      "before": ["j", "k"],
+      "after": ["<Esc>"]
+    }
+  ],
+  "vim.normalModeKeyBindingsNonRecursive": [
+    {
+      "before": ["<leader>", "c"],
+      "commands": ["editor.action.commentLine"]
+    },
+    {
+      "before": ["<leader>", "j"],
+      "commands": ["workbench.action.files.save"]
+    },
+    {
+      "before": ["<leader>", "f"],
+      "commands": ["revealInExplorer"]
+    },
+    {
+      "before": ["<leader>", "w", "v"],
+      "commands": ["workbench.action.splitEditor"]
+    },
+    {
+      "before": ["<leader>", "w", "s"],
+      "commands": ["workbench.action.splitEditorOrthogonal"]
+    },
+    {
+      "before": ["<leader>", "w", "h"],
+      "commands": ["workbench.action.focusLeftGroup"]
+    },
+    {
+      "before": ["<leader>", "w", "j"],
+      "commands": ["workbench.action.focusBelowGroup"]
+    },
+    {
+      "before": ["<leader>", "w", "k"],
+      "commands": ["workbench.action.focusAboveGroup"]
+    },
+    {
+      "before": ["<leader>", "w", "l"],
+      "commands": ["workbench.action.focusRightGroup"]
+    },
+    {
+      "before": ["<leader>", "t"],
+      "commands": ["workbench.action.toggleSidebarVisibility"]
+    },
+    // Undo & Redo from https://github.com/VSCodeVim/Vim/issues/8157#issuecomment-1400217493
+    { "before": ["u"], "commands": ["undo"] },
+    { "before": ["c-r"], "commands": ["redo"] }
+  ],
+  "vim.visualModeKeyBindings": [
+    {
+      "before": ["<leader>", "c"],
+      "commands": ["editor.action.commentLine", "extension.vim_escape"]
+    }
+  ],
+  "vim.hlsearch": true,
+  "vim.cursorStylePerMode.insert": "line",
+  "vim.cursorStylePerMode.normal": "block",
+  "vim.cursorStylePerMode.replace": "block",
+  "vim.cursorStylePerMode.visual": "block",
+
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "explorer.confirmDragAndDrop": false,
+  "editor.tabSize": 2,
+  "explorer.confirmDelete": false,
+  "cSpell.userWords": [
+    "Collab",
+    "Collabs",
+    "Dealflow",
+    "Fastify",
+    "headshot",
+    "onboarded",
+    "openai",
+    "posthog",
+    "rebalance",
+    "reording",
+    "repost",
+    "Reprioritize",
+    "reqs",
+    "splitflap",
+    "Tiktok",
+    "trpc",
+    "tsyringe",
+    "Upsert",
+    "Upserting",
+    "uuidv",
+    "Webflow",
+    "withjuly"
+  ],
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "[json]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
+  "extensions.ignoreRecommendations": true,
+  "colorize.include": [
+    "**/*.css",
+    "**/*.scss",
+    "**/*.sass",
+    "**/*.less",
+    "**/*.styl",
+    "**/*.ts",
+    "**/*.tsx"
+  ],
+  "editor.inlineSuggest.enabled": true,
+  "terminal.integrated.enableMultiLinePasteWarning": false,
+  "workbench.startupEditor": "none",
+  "workbench.sideBar.location": "right",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  },
+  "eslint.validate": ["javascript"],
+  "typescript.tsserver.log": "off",
+  "workbench.colorCustomizations": {},
+  "editor.bracketPairColorization.enabled": false,
+  "breadcrumbs.icons": false,
+  "editor.cursorBlinking": "solid",
+  "editor.find.addExtraSpaceOnTop": false,
+  "editor.roundedSelection": false,
+  "workbench.editor.showIcons": false,
+  "workbench.iconTheme": null,
+  "workbench.tree.renderIndentGuides": "none",
+  "git.decorations.enabled": false,
+  "editor.formatOnSave": true,
+  "typescript.tsserver.maxTsServerMemory": 16384,
+  "security.workspace.trust.untrustedFiles": "open",
+  "window.title": " ",
+  "rust-analyzer.inlayHints.chainingHints.enable": false,
+  "rust-analyzer.inlayHints.closingBraceHints.enable": false,
+  "rust-analyzer.inlayHints.typeHints.enable": false,
+  "rust-analyzer.inlayHints.parameterHints.enable": false,
+  "rust-analyzer.inlayHints.renderColons": false,
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "go.toolsManagement.autoUpdate": true,
+  "editor.unicodeHighlight.ambiguousCharacters": false,
+  "github.copilot.enable": {
+    "*": false,
+    "plaintext": false,
+    "markdown": false,
+    "scminput": false,
+    "yaml": false
+  },
+  "editor.wordWrap": "on",
+  "emmet.showAbbreviationSuggestions": false,
+  "git.openRepositoryInParentFolders": "never",
+  "workbench.colorTheme": "Vesper",
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "emmet.excludeLanguages": ["typescriptreact"],
+  "zenMode.fullScreen": false,
+  "workbench.layoutControl.enabled": false,
+  "window.commandCenter": false,
+  "update.showReleaseNotes": false,
+  "explorer.compactFolders": false,
+  "workbench.activityBar.location": "hidden",
+  "workbench.editor.tabActionCloseVisibility": false,
+  "workbench.statusBar.visible": false,
+  "editor.hideCursorInOverviewRuler": true,
+
+  //"editor.folding": false,
+  "editor.lineDecorationsWidth": 8,
+
+  // Hack to add left padding to line numbers
+  "editor.minimap.enabled": true,
+  "editor.minimap.autohide": true,
+  "editor.minimap.side": "left",
+  "editor.minimap.maxColumn": 4,
+  "editor.glyphMargin": false,
+  "editor.scrollbar.verticalScrollbarSize": 8,
+  "breadcrumbs.enabled": false
+}

@@ -131,3 +131,8 @@ export PATH="$PNPM_HOME:$PATH"
 
 
 export PATH="$HOMEBREW_PREFIX/opt/make/libexec/gnubin:$PATH"
+export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
+
+
+export PATH="/Users/cj/Code/external/go/bin:$PATH"
+
