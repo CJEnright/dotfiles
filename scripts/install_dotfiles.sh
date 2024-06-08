@@ -33,10 +33,6 @@ if [ "$(uname)" == "Darwin" ]; then
   # karabiner
   mkdir -p ~/.config/karabiner
   ln -fs ${BASEDIR}/karabiner.json ~/.config/karabiner/karabiner.json
-
-  # hammerspoon
-  mkdir -p ~/.hammerspoon
-  ln -fs ${BASEDIR}/hammerspoon/init.lua ~/.hammerspoon/init.lua
 fi
 
 # alacritty
