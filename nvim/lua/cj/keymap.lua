@@ -1,27 +1,15 @@
-local nore = { noremap=true, silent=true }
+local map = vim.keymap.set
 
-local keymap = vim.api.nvim_set_keymap
-
-keymap("n", ";", ":", nore)
-keymap("n", "<Leader>j", ":w<CR>", nore)
-keymap("n", "<Leader>k", ":wq<CR>", nore)
-keymap("n", "<Leader>/", ":nohlsearch<CR>", nore)
-keymap("n", "<Leader>w", "<C-w>", nore)
--- Switch to previous buffer
-keymap("n", "<Leader><Leader>", "<C-^>", nore)
-
--- Telescope
-keymap("n", "<Leader>f", ":Telescope find_files<CR>", nore)
-keymap("n", "<Leader>r", ":Telescope live_grep<CR>", nore)
-
--- nvim-tree
-keymap("n", "<C-n>", ":NvimTreeToggle<CR>", nore)
+map("n", ";", ":")
+map("n", "<Leader>j", "<cmd>w<CR>")
+map("n", "<Leader>k", "<cmd>wq<CR>")
+map("n", "<Leader>/", "<cmd>nohlsearch<CR>")
+map("n", "<Leader>w", "<C-w>")
+map("n", "<Leader><Leader>", "<C-^>")
 
 -- Notes
-keymap("n", "<Leader>nn", ":e ~/Code/notes/index.md<CR>", nore)
-keymap("n", "<Leader>nj", ":e ~/Code/notes/journal.md<CR>", nore)
-keymap("n", "<Leader>nl", ":e ~/Code/notes/log.md<CR>", nore)
+map("n", "<Leader>nn", "<cmd>e ~/Code/notes/index.md<CR>")
+map("n", "<Leader>nj", "<cmd>e ~/Code/notes/journal.md<CR>")
+map("n", "<Leader>nl", "<cmd>e ~/Code/notes/log.md<CR>")
 
-keymap("i", "jk", "<ESC>", nore)
-
-
+map("i", "jk", "<ESC>")
