@@ -136,3 +136,7 @@ export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
 
 export PATH="/Users/cj/Code/external/go/bin:$PATH"
 
+eval "$(fnm env --use-on-cd --shell zsh)"
+
+
+
