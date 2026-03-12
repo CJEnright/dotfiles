@@ -4,16 +4,16 @@ return {
   -- File explorer
   {
     "stevearc/oil.nvim",
-    config = function()
-      require("oil").setup({
-        view_options = { show_hidden = true },
-        columns = {},
-        keymaps = {
-          ["<C-o>"] = "actions.close",
-        },
-      })
-      vim.keymap.set("n", "-", "<CMD>Oil<CR>")
-    end,
+    keys = {
+      { "-", "<CMD>Oil<CR>", desc = "Open file explorer" },
+    },
+    opts = {
+      view_options = { show_hidden = true },
+      columns = {},
+      keymaps = {
+        ["q"] = "actions.close",
+      },
+    },
   },
 
   -- Completion (blink.cmp)
@@ -30,9 +30,9 @@ return {
   },
 
   -- LSP
-  "neovim/nvim-lspconfig",
-  "williamboman/mason.nvim",
-  "williamboman/mason-lspconfig.nvim",
+  { "neovim/nvim-lspconfig", event = "BufReadPre" },
+  { "williamboman/mason.nvim", event = "BufReadPre" },
+  { "williamboman/mason-lspconfig.nvim", event = "BufReadPre" },
 
   -- Formatting
   {
@@ -55,27 +55,23 @@ return {
   -- Telescope
   {
     "nvim-telescope/telescope.nvim",
+    cmd = "Telescope",
     keys = {
       { "<Leader>f", "<cmd>Telescope find_files<cr>" },
       { "<Leader>r", "<cmd>Telescope live_grep<cr>" },
     },
   },
 
-  -- Treesitter
+  -- Treesitter (parsers managed via :TSInstall, highlighting is native in 0.11+)
   {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
-    config = function()
-      local parsers = { "lua", "typescript", "javascript", "tsx", "json", "yaml", "html", "css", "bash", "rust", "prisma" }
-      for _, parser in ipairs(parsers) do
-        pcall(function() vim.treesitter.language.add(parser) end)
-      end
-    end,
   },
 
   -- Git
   {
     "lewis6991/gitsigns.nvim",
+    event = "BufReadPre",
     opts = {
       signs = {
         add = { text = "▐" },

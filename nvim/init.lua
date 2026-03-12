@@ -11,8 +11,17 @@ if not vim.uv.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-require("cj.disable_builtins")
-require("lazy").setup("cj.plugins")
+require("lazy").setup("cj.plugins", {
+  performance = {
+    rtp = {
+      disabled_plugins = {
+        "gzip", "tarPlugin", "tohtml", "tutor", "zipPlugin",
+        "netrwPlugin", "2html_plugin", "getscript", "getscriptPlugin",
+        "logipat", "rrhelper", "vimball", "vimballPlugin",
+      },
+    },
+  },
+})
 require("cj.options")
 require("cj.keymap")
 require("cj.lsp")

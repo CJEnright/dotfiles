@@ -26,9 +26,12 @@ vim.opt.shiftround = true
 vim.opt.cursorline = true
 vim.cmd.colorscheme("bw")
 
--- Spell checking
-vim.opt.spell = true
+-- Spell checking (only for prose)
 vim.opt.spelllang = "en_us"
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "markdown", "text", "gitcommit" },
+  callback = function() vim.opt_local.spell = true end,
+})
 
 -- Completion
 vim.opt.completeopt = { "menuone", "noselect" }

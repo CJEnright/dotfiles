@@ -1,5 +1,12 @@
 require("mason").setup()
-require("mason-lspconfig").setup()
+require("mason-lspconfig").setup({
+  ensure_installed = { "ts_ls", "eslint", "prismals", "jsonls", "yamlls", "cssls", "tailwindcss", "dockerls", "bashls", "rust_analyzer" },
+})
+
+vim.diagnostic.config({
+  virtual_text = { prefix = "●" },
+  float = { border = "rounded" },
+})
 
 local capabilities = vim.tbl_deep_extend(
   "force",
