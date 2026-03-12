@@ -4,9 +4,6 @@
 
 BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-echo 'Installing  dotfiles'
-${BASEDIR}/install_dotfiles.sh
-
 if [ "$(uname)" == "Darwin" ]; then
   echo 'Installing  xcode'
   xcode-select --install
@@ -31,3 +28,6 @@ if [ "$(uname)" == "Darwin" ]; then
   ${BASEDIR}/macos_settings.sh
 #elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
 fi
+
+echo 'Installing  dotfiles'
+${BASEDIR}/install_dotfiles.sh
